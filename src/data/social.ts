@@ -53,3 +53,46 @@ export const sections = [
   { id: "projetos", label: "Projetos" },
   { id: "contato", label: "Contato" },
 ] as const;
+
+/**
+ * Copy das seções, revisado com a narrativa full-stack.
+ * A força vem do front-end B2B; o back-end entra como direção honesta
+ * (a seção Stack mostra a trilha em progresso), sem inflar o que ainda não
+ * existe em produção.
+ */
+export const copy = {
+  hero: {
+    badge: "Disponível para projetos",
+    /** Frases do typewriter da hero. */
+    typing: [
+      "interfaces em React & Next.js",
+      "tipagem de ponta a ponta com TypeScript",
+      "arquitetura de componentes escalável",
+      "trilha back-end em construção",
+    ],
+    primaryCta: "Vamos conversar",
+    secondaryCta: "Ver projetos",
+  },
+  about: {
+    title: "Sobre mim",
+    paragraphs: [
+      "Sou desenvolvedor com forte base no ecossistema TypeScript — Angular e React — e foco em engenharia de plataformas B2B. Tenho histórico prático em arquiteturas orientadas a componentes, consumo de APIs RESTful e resolução de gargalos de performance em sistemas de alta complexidade, sob metodologias ágeis (Scrum).",
+      "Sou autodidata e movido pela curiosidade de entender como as coisas funcionam. Essa mesma curiosidade é o que me leva do front-end para o back-end: estou construindo a trilha de servidor, banco de dados e infraestrutura para fechar o ciclo full-stack de verdade — começando por este site.",
+    ],
+    cvLabel: "Baixar currículo",
+    cvHref: "/curriculo.pdf",
+  },
+  contact: {
+    title: "Entre em contato",
+    subtitle:
+      "Tem um projeto em mente ou quer bater um papo sobre front-end, back-end ou a virada full-stack? Me manda uma mensagem.",
+  },
+} as const;
+
+/** Indicadores de impacto exibidos na seção "Sobre". */
+export const stats = [
+  { value: "+9", label: "Sprints ágeis" },
+  { value: "+4", label: "Módulos core entregues" },
+  { value: "+29", label: "Gargalos e bugs resolvidos" },
+  { value: "R$ 3M+", label: "Em dados fiscais processados" },
+] as const;

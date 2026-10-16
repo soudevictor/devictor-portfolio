@@ -36,20 +36,25 @@ Base: `SPEC.md` + `tasks/plan.md`. Ordem por dependência.
 
 ## Fase 2 — Dados e SEO
 
-- [ ] Task: `src/data/projects.ts` com projetos migrados do site antigo (schema full-stack)
+- [x] Task: `src/data/projects.ts` com projetos migrados do site antigo (schema full-stack)
   - Acceptance: todos os projetos atuais presentes, tipados, categoria `frontend`
   - Verify: `tsc --noEmit` sem erros
   - Files: `src/data/projects.ts`
 
-- [ ] Task: `src/data/social.ts` + copy revisada com narrativa full-stack
+- [x] Task: `src/data/social.ts` + copy revisada com narrativa full-stack
   - Acceptance: textos de hero/sobre aprováveis, título "Desenvolvedor Full-Stack"
   - Verify: revisão do usuário
   - Files: `src/data/social.ts`, textos nas seções
 
-- [ ] Task: Metadata/SEO completa (OG, favicon, description)
+- [x] Task: Metadata/SEO completa (OG, favicon, description)
   - Acceptance: title/description full-stack, og tags, favicon migrado
   - Verify: view-source mostra tags
   - Files: `src/app/layout.tsx`, `public/`
+
+- [x] Task: `src/data/stack.ts` — dados da Stack Técnica (inclui trilha Back-end & Infra)
+  - Acceptance: 4 categorias tipadas (Linguagens & Core / Frameworks & Libs / Estilização & Design / Back-end & Infra em progresso)
+  - Verify: `tsc --noEmit` sem erros
+  - Files: `src/data/stack.ts`
 
 ## Fase 3 — Layout base
 

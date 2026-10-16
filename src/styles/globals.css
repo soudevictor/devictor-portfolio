@@ -10,7 +10,6 @@
 @theme {
   /* Tipografia — uma família com peso e largura; tabular para números. */
   --font-sans: var(--font-sans-stack);
-  --font-mono: var(--font-mono-stack);
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -30,33 +29,42 @@
 }
 
 :root {
-  /* Familias injetadas pelo next/font no layout (via variáveis CSS). */
-  --font-sans-stack: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono-stack: ui-monospace, "SFMono-Regular", "Menlo", monospace;
+  /* Familias via geist (next/font/local): self-hosted, sem render-blocking. */
+  --font-sans-stack: var(--font-geist-sans), system-ui, sans-serif;
 
-  /* --- tema claro --- */
-  --ground: #fafaf9; /* fundo — pedra quente, não branco puro */
-  --ink: #1c1917; /* texto principal, tinta cheia */
-  --ink-soft: #57534e; /* texto secundário (notas, nunca corpo corrido) */
-  --accent: #b45309; /* âmbar profundo — ação e um detalhe */
+  /* --- tema claro — cobalto sobre papel frio --- */
+  --ground: #f8fafc;
+  --ink: #0f172a;
+  --ink-soft: #475569;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  /* Fundo de botão: mais escuro que o accent de texto, para o rótulo branco
+     passar em 4.5:1 (AA). */
+  --accent-fill: #1d4ed8;
+  --accent-fill-hover: #1e40af;
   --accent-contrast: #ffffff;
-  --surface: #ffffff; /* cartão / campo elevado */
-  --surface-2: #f5f5f4; /* tom entre superfícies (sem linha, sem sombra) */
-  --border: #e7e5e4;
+  --surface: #ffffff;
+  --surface-2: #eef2f7;
+  --border: #d8e0ea;
 
   --focus: var(--accent);
 }
 
 .dark {
-  /* --- tema escuro --- */
-  --ground: #1c1917;
-  --ink: #f5f5f4;
-  --ink-soft: #a8a29e;
-  --accent: #f59e0b; /* âmbar mais vivo para contraste no escuro */
-  --accent-contrast: #1c1917;
-  --surface: #292524;
-  --surface-2: #0c0a09;
-  --border: #44403c;
+  /* --- tema escuro — cobalto sobre preto profundo --- */
+  --ground: #09090b;
+  --ink: #f8fafc;
+  --ink-soft: #94a3b8;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  /* O accent de texto é claro (legível no escuro); o fill do botão fica em
+     #2563eb para o branco passar em 4.5:1. */
+  --accent-fill: #2563eb;
+  --accent-fill-hover: #1d4ed8;
+  --accent-contrast: #ffffff;
+  --surface: #11141b;
+  --surface-2: #181d27;
+  --border: #222734;
 
   --focus: var(--accent);
 }
@@ -71,6 +79,34 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Caret do typewriter: blink hard de terminal, não um fade decorativo. */
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Reveal por seção (sobe + aparece). Visível por padrão: sem JS nada fica
+   oculto. Com a classe `js` (aplicada no <head>), o bloco começa escondido e o
+   IntersectionObserver do React marca `is-in` para revelar — sem flash de
+   "aparece, some, reaparece". */
+[data-reveal] {
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal]:not(.is-in) {
+  opacity: 0;
+  transform: translateY(1rem);
 }
 
 html {

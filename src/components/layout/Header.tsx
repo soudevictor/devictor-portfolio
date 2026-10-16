@@ -15,7 +15,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-[var(--border)] bg-[var(--ground)]">
+    <header className="fixed inset-x-0 top-0 z-40 bg-[var(--surface-2)]">
       <Container>
         <div className="flex items-center justify-between py-4">
           <a
@@ -64,7 +64,7 @@ export function Header() {
         <nav
           id="nav-mobile"
           aria-label="Principal (móvel)"
-          className="border-t border-[var(--border)] bg-[var(--ground)] md:hidden"
+          className="bg-[var(--ground)] md:hidden"
         >
           <Container>
             <ul className="py-2">

@@ -21,7 +21,7 @@ const icons = {
  */
 export function Footer() {
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--surface-2)] py-14">
+    <footer className="bg-[var(--ground)] py-14">
       <Container>
         <p
           aria-hidden="true"
@@ -31,7 +31,7 @@ export function Footer() {
         </p>
 
         <p className="mt-4 max-w-md text-[var(--ink-soft)]">
-          {site.role} — construindo interfaces com o pé no back-end.
+          {site.role}, construindo interfaces com o pé no back-end.
         </p>
 
         <div className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">

@@ -5,7 +5,10 @@ const nextConfig: NextConfig = {
   output: "export",
   reactStrictMode: true,
   images: {
-    // Formatos modernos; o deploy é estático (Vercel).
+    // Em `output: export` não há otimizador de imagem no servidor. Sem isto,
+    // o Next emite URLs `/_next/image` que 404 num deploy estático. Com
+    // `unoptimized`, as imagens vão pelo caminho direto em `/images`.
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
   },
 };

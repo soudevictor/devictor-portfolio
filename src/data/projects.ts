@@ -20,6 +20,8 @@ export interface Project {
   stack: string[];
   /** URL do logo/thumbnail em `public/`. */
   logo?: string;
+  /** Screenshot real da interface no ar, em `public/images/work/`. */
+  screenshot?: string;
   repoUrl?: string;
   liveUrl?: string;
   /** Ordenação; os de maior destaque vêm primeiro. */
@@ -44,6 +46,7 @@ export const projects: Project[] = [
       "Vitest",
     ],
     logo: "/images/thumbnails/talentmetricsLogo.svg",
+    screenshot: "/images/work/talentmetrics.png",
     liveUrl: "https://talent-metrics-landing.vercel.app/",
     repoUrl: "https://github.com/soudevictor/talent-metrics-landing",
     featured: true,
@@ -65,6 +68,7 @@ export const projects: Project[] = [
       "Vitest",
     ],
     logo: "/images/thumbnails/axiomerpLogo.svg",
+    screenshot: "/images/work/axiomerp.png",
     liveUrl: "https://axiomerp.vercel.app/",
     repoUrl: "https://github.com/soudevictor/axiom-erp",
     featured: true,

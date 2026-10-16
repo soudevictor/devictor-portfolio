@@ -29,3 +29,6 @@ next-env.d.ts
 
 # editor
 .vscode
+
+# tasteskill (inspect/lint scratch output)
+.taste-skill/

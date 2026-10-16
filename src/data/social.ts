@@ -76,8 +76,8 @@ export const copy = {
   about: {
     title: "Sobre mim",
     paragraphs: [
-      "Sou desenvolvedor com forte base no ecossistema TypeScript — Angular e React — e foco em engenharia de plataformas B2B. Tenho histórico prático em arquiteturas orientadas a componentes, consumo de APIs RESTful e resolução de gargalos de performance em sistemas de alta complexidade, sob metodologias ágeis (Scrum).",
-      "Sou autodidata e movido pela curiosidade de entender como as coisas funcionam. Essa mesma curiosidade é o que me leva do front-end para o back-end: estou construindo a trilha de servidor, banco de dados e infraestrutura para fechar o ciclo full-stack de verdade — começando por este site.",
+      "Sou desenvolvedor com forte base no ecossistema TypeScript, Angular e React, e foco em engenharia de plataformas B2B. Tenho histórico prático em arquiteturas orientadas a componentes, consumo de APIs RESTful e resolução de gargalos de performance em sistemas de alta complexidade, sob metodologias ágeis (Scrum).",
+      "Sou autodidata e movido pela curiosidade de entender como as coisas funcionam. Essa mesma curiosidade é o que me leva do front-end para o back-end: estou construindo a trilha de servidor, banco de dados e infraestrutura para fechar o ciclo full-stack de verdade, começando por este site.",
     ],
     cvLabel: "Baixar currículo",
     cvHref: "/curriculo.pdf",

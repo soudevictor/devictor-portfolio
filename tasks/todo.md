@@ -4,32 +4,32 @@ Base: `SPEC.md` + `tasks/plan.md`. Ordem por dependência.
 
 ## Fase 1 — Fundação
 
-- [ ] Task: Commitar estado final do site vanilla (últimas edições em index.html, _hero.scss, style.css)
+- [x] Task: Commitar estado final do site vanilla (últimas edições em index.html, _hero.scss, style.css)
   - Acceptance: working tree limpo antes do move para `legacy/`; histórico do site vanilla preservado no git
   - Verify: `git status` limpo; `git log` mostra o commit de fechamento
   - Files: `index.html`, `assets/javascript/index.js`, `assets/styles/css/style.css`, `assets/styles/sass/partials/_hero.scss`
 
-- [ ] Task: Mover site antigo para `legacy/` (preservar até deploy)
+- [x] Task: Mover site antigo para `legacy/` (preservar até deploy)
   - Acceptance: `index.html`, `assets/`, configs antigas dentro de `legacy/`; raiz limpa para o scaffold; SPEC.md e tasks/ intactos
   - Verify: `ls` na raiz não mostra arquivos do site antigo
   - Files: `index.html`, `assets/`, `package.json` antigo
 
-- [ ] Task: Migrar assets para `public/` (images, logos, thumbnails, favicon, vídeo, currículo)
+- [x] Task: Migrar assets para `public/` (images, logos, thumbnails, favicon, vídeo, currículo)
   - Acceptance: `background.webp`, `img01.jpeg`, `logos/`, `thumbnails/`, `favicon.ico`, `videos/background.mp4` e `JoaoVictor_DesenvolvedorFrontEnd.pdf` (renomeado para `public/curriculo.pdf` como placeholder) todos em `public/`; caminhos referenciados em `src/` resolvem sem 404
   - Verify: `npm run build` e navegação manual pelos caminhos de mídia
   - Files: `public/*`
 
-- [ ] Task: Scaffold Next.js 15 (TS strict, Tailwind v4, ESLint, App Router)
+- [x] Task: Scaffold Next.js 15 (TS strict, Tailwind v4, ESLint, App Router)
   - Acceptance: `npm run dev` sobe; typecheck e lint passam
   - Verify: `npm run lint && npm run build`
   - Files: `package.json`, `tsconfig.json`, `next.config.ts`, `src/app/*`
 
-- [ ] Task: Tokens de design em `globals.css` + fontes via `next/font`
+- [x] Task: Tokens de design em `globals.css` + fontes via `next/font`
   - Acceptance: CSS variables para light/dark definidas (ground/ink/accent/surface/border); fonte carregada sem render-blocking
   - Verify: build passa; variáveis visíveis no CSS compilado
   - Files: `src/styles/globals.css`, `src/app/layout.tsx`
 
-- [ ] Task: Tema dark/light sem flash (script inline + toggle persistido)
+- [x] Task: Tema dark/light sem flash (script inline + toggle persistido)
   - Acceptance: respeita `prefers-color-scheme`, persiste escolha, zero flash no reload
   - Verify: reload manual nos dois temas
   - Files: `src/app/layout.tsx`, `src/components/layout/ThemeToggle.tsx`

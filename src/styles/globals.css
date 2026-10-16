@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+/* ========================================================================
+   Design tokens — portfólio Devictor
+   Um solo, uma tinta, um acento. Temas claro/escuro como cidadãos de
+   primeira classe, sem flash (o script no <head> aplica a classe antes da
+   hidratação). Todos os componentes referenciam só estas variáveis.
+   ======================================================================== */
+
+@theme {
+  /* Tipografia — uma família com peso e largura; tabular para números. */
+  --font-sans: var(--font-sans-stack);
+  --font-mono: var(--font-mono-stack);
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-7xl: 4.5rem;
+
+  /* Rampa de espaço — margens apertadas, seções com vão largo. */
+  --spacing-section: 8rem;
+  --radius-card: 0.5rem;
+}
+
+:root {
+  /* Familias injetadas pelo next/font no layout (via variáveis CSS). */
+  --font-sans-stack: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono-stack: ui-monospace, "SFMono-Regular", "Menlo", monospace;
+
+  /* --- tema claro --- */
+  --ground: #fafaf9; /* fundo — pedra quente, não branco puro */
+  --ink: #1c1917; /* texto principal, tinta cheia */
+  --ink-soft: #57534e; /* texto secundário (notas, nunca corpo corrido) */
+  --accent: #b45309; /* âmbar profundo — ação e um detalhe */
+  --accent-contrast: #ffffff;
+  --surface: #ffffff; /* cartão / campo elevado */
+  --surface-2: #f5f5f4; /* tom entre superfícies (sem linha, sem sombra) */
+  --border: #e7e5e4;
+
+  --focus: var(--accent);
+}
+
+.dark {
+  /* --- tema escuro --- */
+  --ground: #1c1917;
+  --ink: #f5f5f4;
+  --ink-soft: #a8a29e;
+  --accent: #f59e0b; /* âmbar mais vivo para contraste no escuro */
+  --accent-contrast: #1c1917;
+  --surface: #292524;
+  --surface-2: #0c0a09;
+  --border: #44403c;
+
+  --focus: var(--accent);
+}
+
+/* Respeita quem prefere menos movimento — desliga as travel, mantém conteúdo. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--ground);
+  color: var(--ink);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Foco visível consistente e com contraste — nada de outline removido. */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--accent-contrast);
+}
+
+/* Âncoras: a barra fixa não pode cobrir o título da seção. */
+[id] {
+  scroll-margin-top: 5rem;
+}

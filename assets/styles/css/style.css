@@ -177,7 +177,8 @@ table {
 }
 
 @keyframes blink {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0;
   }
   50% {
@@ -243,11 +244,16 @@ table {
   }
 }
 @keyframes glowPulse {
-  0%, 100% {
-    box-shadow: 0 0 10px rgba(0, 212, 224, 0.2), 0 0 30px rgba(0, 212, 224, 0.05);
+  0%,
+  100% {
+    box-shadow:
+      0 0 10px rgba(0, 212, 224, 0.2),
+      0 0 30px rgba(0, 212, 224, 0.05);
   }
   50% {
-    box-shadow: 0 0 20px rgba(0, 212, 224, 0.4), 0 0 60px rgba(0, 212, 224, 0.15);
+    box-shadow:
+      0 0 20px rgba(0, 212, 224, 0.4),
+      0 0 60px rgba(0, 212, 224, 0.15);
   }
 }
 @keyframes shimmer {
@@ -270,7 +276,8 @@ table {
   }
 }
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -278,7 +285,8 @@ table {
   }
 }
 @keyframes floatSlow {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
   33% {
@@ -307,7 +315,8 @@ table {
   }
 }
 @keyframes scrollBounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
     opacity: 1;
   }
@@ -331,7 +340,8 @@ table {
     transform: scale(1);
     opacity: 1;
   }
-  50%, 100% {
+  50%,
+  100% {
     transform: scale(2);
     opacity: 0;
   }
@@ -533,7 +543,8 @@ table {
   border-left: 3px solid transparent;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.header__mobile-link:hover, .header__mobile-link.is-active {
+.header__mobile-link:hover,
+.header__mobile-link.is-active {
   color: #2563eb;
   background: rgba(37, 99, 235, 0.08);
   border-left-color: #2563eb;
@@ -589,7 +600,8 @@ table {
 .page--light-theme .header__menu-link {
   color: #0f172a;
 }
-.page--light-theme .header__menu-link:hover, .page--light-theme .header__menu-link.is-active {
+.page--light-theme .header__menu-link:hover,
+.page--light-theme .header__menu-link.is-active {
   color: #2563eb;
 }
 .page--light-theme .header__theme-toggle {
@@ -621,7 +633,8 @@ table {
 .page--light-theme .header__mobile-link {
   color: #0f172a;
 }
-.page--light-theme .header__mobile-link:hover, .page--light-theme .header__mobile-link.is-active {
+.page--light-theme .header__mobile-link:hover,
+.page--light-theme .header__mobile-link.is-active {
   color: #2563eb;
   background: rgba(37, 99, 235, 0.08);
   border-left-color: #2563eb;
@@ -640,9 +653,39 @@ table {
   overflow: hidden;
   padding: 6rem 1rem 4rem;
 }
-.hero > * {
+.hero__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+}
+.hero__bg-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero__bg-video {
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+.hero__bg-video.is-playing {
+  opacity: 1;
+}
+.hero__content {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 1.25rem;
+  width: 100%;
 }
 .hero__badge {
   display: inline-flex;
@@ -725,7 +768,10 @@ table {
   font-weight: 600;
   font-size: 0.875rem;
   letter-spacing: 0.01em;
-  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   text-decoration: none;
   border: 1.5px solid transparent;
 }
@@ -739,7 +785,9 @@ table {
 .hero__cta-button {
   background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
   border: 1px solid rgba(59, 130, 246, 0.4);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 4px 12px rgba(37, 99, 235, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 4px 12px rgba(37, 99, 235, 0.2);
   border-radius: 8px;
   color: #ffffff;
   font-weight: 500;
@@ -747,7 +795,9 @@ table {
 }
 .hero__cta-button:hover {
   transform: translateY(-2px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 6px 16px rgba(37, 99, 235, 0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 6px 16px rgba(37, 99, 235, 0.3);
   color: #ffffff;
 }
 .hero__cta-button--outline {
@@ -796,7 +846,22 @@ table {
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
-  background: radial-gradient(ellipse at 20% 40%, rgba(37, 99, 235, 0.07) 0%, transparent 55%), radial-gradient(ellipse at 80% 60%, rgba(16, 185, 129, 0.05) 0%, transparent 55%), radial-gradient(ellipse at 50% 50%, rgba(37, 99, 235, 0.03) 0%, transparent 70%);
+  background:
+    radial-gradient(
+      ellipse at 20% 40%,
+      rgba(37, 99, 235, 0.07) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 80% 60%,
+      rgba(16, 185, 129, 0.05) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 50% 50%,
+      rgba(37, 99, 235, 0.03) 0%,
+      transparent 70%
+    );
 }
 .hero__particle {
   position: absolute;
@@ -905,7 +970,17 @@ table {
   color: #94a3b8;
 }
 .page--light-theme .hero__particles {
-  background: radial-gradient(ellipse at 20% 40%, rgba(37, 99, 235, 0.06) 0%, transparent 55%), radial-gradient(ellipse at 80% 60%, rgba(16, 185, 129, 0.04) 0%, transparent 55%);
+  background:
+    radial-gradient(
+      ellipse at 20% 40%,
+      rgba(37, 99, 235, 0.06) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 80% 60%,
+      rgba(16, 185, 129, 0.04) 0%,
+      transparent 55%
+    );
 }
 .page--light-theme .hero__particle {
   background: #2563eb;
@@ -934,7 +1009,9 @@ table {
   z-index: 0;
   border-radius: 16px;
   border: 1px solid #222734;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08), 0 8px 32px rgba(0, 0, 0, 0.45);
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.45);
   overflow: hidden;
 }
 @media (min-width: 768px) {
@@ -947,12 +1024,15 @@ table {
   animation: slideInLeft both;
   animation-timeline: view(100% 5%);
 }
-.about__image-container::before, .about__image-container::after {
+.about__image-container::before,
+.about__image-container::after {
   display: none;
 }
 .about__image-container:hover {
   border-color: rgba(37, 99, 235, 0.4);
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15), 0 12px 40px rgba(0, 0, 0, 0.55);
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.15),
+    0 12px 40px rgba(0, 0, 0, 0.55);
 }
 .about__image {
   width: 100%;
@@ -1026,7 +1106,9 @@ table {
 .about__stat:hover {
   border-color: rgba(59, 130, 246, 0.4);
   transform: translateY(-3px);
-  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2), 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 0 20px rgba(37, 99, 235, 0.2),
+    0 4px 20px rgba(0, 0, 0, 0.4);
 }
 .about__stat-value {
   display: block;
@@ -1158,7 +1240,9 @@ table {
 .project-card:hover {
   transform: translateY(-6px);
   border-color: rgba(37, 99, 235, 0.4);
-  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2), 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 0 20px rgba(37, 99, 235, 0.2),
+    0 4px 20px rgba(0, 0, 0, 0.4);
 }
 .project-card:hover::before {
   opacity: 1;
@@ -1285,7 +1369,9 @@ table {
 .project-card__btn--primary {
   background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
   border: 1px solid rgba(59, 130, 246, 0.4);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 4px 12px rgba(37, 99, 235, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 4px 12px rgba(37, 99, 235, 0.2);
   border-radius: 8px;
   color: #ffffff;
   font-weight: 500;
@@ -1293,7 +1379,9 @@ table {
 }
 .project-card__btn--primary:hover {
   transform: translateY(-2px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 6px 16px rgba(37, 99, 235, 0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 6px 16px rgba(37, 99, 235, 0.3);
   color: #ffffff;
 }
 .project-card__btn--outline {
@@ -1325,7 +1413,11 @@ table {
 .project-card__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(37, 99, 235, 0.75) 0%, rgba(29, 78, 216, 0.9) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(37, 99, 235, 0.75) 0%,
+    rgba(29, 78, 216, 0.9) 100%
+  );
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1422,7 +1514,11 @@ table {
   color: #2563eb;
 }
 .page--light-theme .project-card__overlay {
-  background: linear-gradient(to bottom, rgba(37, 99, 235, 0.82) 0%, rgba(30, 64, 175, 0.95) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(37, 99, 235, 0.82) 0%,
+    rgba(30, 64, 175, 0.95) 100%
+  );
 }
 .page--light-theme .project-card__link:hover {
   color: #2563eb;
@@ -1466,7 +1562,9 @@ table {
 }
 .skill-category:hover {
   border-color: rgba(37, 99, 235, 0.4);
-  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2), 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 0 20px rgba(37, 99, 235, 0.2),
+    0 4px 20px rgba(0, 0, 0, 0.4);
   transform: translateY(-4px);
 }
 .skill-category:hover::after {
@@ -1676,7 +1774,9 @@ table {
   outline: none;
   border-color: #2563eb;
   background: rgba(9, 9, 11, 0.8);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1), 0 4px 15px rgba(37, 99, 235, 0.08);
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.1),
+    0 4px 15px rgba(37, 99, 235, 0.08);
 }
 .contact__form-input:focus + .contact__form-label {
   color: #2563eb;
@@ -1691,7 +1791,9 @@ table {
   padding: 1rem 2rem;
   background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
   border: 1px solid rgba(59, 130, 246, 0.4);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 4px 12px rgba(37, 99, 235, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 4px 12px rgba(37, 99, 235, 0.2);
   border-radius: 8px;
   color: #ffffff;
   font-weight: 500;
@@ -1707,7 +1809,9 @@ table {
 }
 .contact__form-submit:hover {
   transform: translateY(-2px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 6px 16px rgba(37, 99, 235, 0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 6px 16px rgba(37, 99, 235, 0.3);
 }
 .contact__form-submit:active {
   transform: translateY(0);
@@ -1745,7 +1849,9 @@ table {
 .page--light-theme .contact__form-input:focus {
   border-color: #2563eb;
   background: #f8fafc;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1), 0 4px 15px rgba(37, 99, 235, 0.08);
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.1),
+    0 4px 15px rgba(37, 99, 235, 0.08);
 }
 .page--light-theme .contact__form-input:focus + .contact__form-label {
   color: #2563eb;
@@ -1855,10 +1961,12 @@ table {
 .page--light-theme .footer__tagline {
   color: #64748b;
 }
-.page--light-theme .footer__nav a, .page--light-theme .footer__socials a {
+.page--light-theme .footer__nav a,
+.page--light-theme .footer__socials a {
   color: #64748b;
 }
-.page--light-theme .footer__nav a:hover, .page--light-theme .footer__socials a:hover {
+.page--light-theme .footer__nav a:hover,
+.page--light-theme .footer__socials a:hover {
   color: #2563eb;
 }
 .page--light-theme .footer__bottom p {
@@ -2033,15 +2141,42 @@ body {
   background-color: #09090b;
   color: #94a3b8;
   line-height: 1.7;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: radial-gradient(ellipse at 20% 50%, rgba(37, 99, 235, 0.05) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(16, 185, 129, 0.04) 0%, transparent 60%), radial-gradient(ellipse at 50% 90%, rgba(37, 99, 235, 0.03) 0%, transparent 50%);
+  background-image:
+    radial-gradient(
+      ellipse at 20% 50%,
+      rgba(37, 99, 235, 0.05) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(16, 185, 129, 0.04) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 50% 90%,
+      rgba(37, 99, 235, 0.03) 0%,
+      transparent 50%
+    );
   background-attachment: fixed;
 }
 .page--light-theme {
   background-color: #f8fafc;
-  background-image: radial-gradient(ellipse at 20% 50%, rgba(0, 126, 168, 0.04) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(0, 100, 200, 0.03) 0%, transparent 60%);
+  background-image:
+    radial-gradient(
+      ellipse at 20% 50%,
+      rgba(0, 126, 168, 0.04) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(0, 100, 200, 0.03) 0%,
+      transparent 60%
+    );
   color: #0f172a;
 }
 .page--light-theme a {

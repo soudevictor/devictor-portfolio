@@ -1,5 +1,5 @@
 // ============================================================
-// DEVICTOR — Hero v3.0 (Corporate Refinement)
+// DEVICTOR — Hero v4.0 (Deferred Video Background)
 // ============================================================
 
 .hero {
@@ -18,9 +18,48 @@
 
   padding: 6rem 1rem 4rem;
 
-  > * {
+  // ── Background Layer: imagem estática (LCP) + vídeo diferido (JS) ──
+  // position: fixed → cobre toda a página independente do scroll
+  &__background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; // abaixo de todo o conteúdo da página
+    pointer-events: none;
+  }
+
+  // Estilo compartilhado entre <img> e <video> de fundo
+  &__bg-media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  // Vídeo começa invisível; classe .is-playing adicionada pelo JS ao disparar 'playing'
+  &__bg-video {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+
+    &.is-playing {
+      opacity: 1;
+    }
+  }
+
+  // ── Wrapper de conteúdo (z-index: 1 sobre o background) ───────
+  &__content {
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 1.25rem;
+    width: 100%;
   }
 
   // ── Badge de disponibilidade refinado ──────────────────
@@ -197,36 +236,36 @@
       font-size: 1.1rem;
       animation: scrollBounce 1.5s ease-in-out infinite;
     }
-    }
+  }
 
-// ── Partículas CSS full-bleed ──────────────────────────
+  // ── Partículas CSS full-bleed ──────────────────────────
   &__particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-  // O gradiente full-bleed vive aqui para evitar clipping
-  background:
-    radial-gradient(
-      ellipse at 20% 40%,
-      rgba(37, 99, 235, 0.07) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse at 80% 60%,
-      rgba(16, 185, 129, 0.05) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse at 50% 50%,
-      rgba(37, 99, 235, 0.03) 0%,
-      transparent 70%
-    );
-}
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+    // O gradiente full-bleed vive aqui para evitar clipping
+    background:
+      radial-gradient(
+        ellipse at 20% 40%,
+        rgba(37, 99, 235, 0.07) 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse at 80% 60%,
+        rgba(16, 185, 129, 0.05) 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse at 50% 50%,
+        rgba(37, 99, 235, 0.03) 0%,
+        transparent 70%
+      );
+  }
 
   &__particle {
     position: absolute;
@@ -353,20 +392,20 @@
       color: #94a3b8;
     }
     &__particles {
-    background:
-      radial-gradient(
-        ellipse at 20% 40%,
-        rgba(37, 99, 235, 0.06) 0%,
-        transparent 55%
-      ),
-      radial-gradient(
-        ellipse at 80% 60%,
-        rgba(16, 185, 129, 0.04) 0%,
-        transparent 55%
-      );
-  }
+      background:
+        radial-gradient(
+          ellipse at 20% 40%,
+          rgba(37, 99, 235, 0.06) 0%,
+          transparent 55%
+        ),
+        radial-gradient(
+          ellipse at 80% 60%,
+          rgba(16, 185, 129, 0.04) 0%,
+          transparent 55%
+        );
+    }
     &__particle {
-    background: #2563eb;
+      background: #2563eb;
+    }
   }
-}
 }

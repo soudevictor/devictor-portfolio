@@ -18,14 +18,20 @@
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Devictor — Desenvolvedor Front-End | Angular & Next.js" />
+    <meta
+      property="og:title"
+      content="Devictor — Desenvolvedor Front-End | Angular & Next.js"
+    />
     <meta
       property="og:description"
       content="Portfólio de João Victor Carvalho — Desenvolvedor Front-End especializado em Angular (Signals), Next.js (App Router) e TypeScript."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://soudevictor.vercel.app/" />
-    <meta property="og:image" content="https://soudevictor.vercel.app/assets/images/og-image.png" />
+    <meta
+      property="og:image"
+      content="https://soudevictor.vercel.app/assets/images/og-image.png"
+    />
 
     <link
       rel="shortcut icon"
@@ -150,31 +156,46 @@
 
       <!-- Hero -->
       <section id="inicio" class="hero" aria-label="Apresentação">
-
-        <span class="hero__badge" aria-label="Status: disponível para novos projetos">
-          Disponível para projetos
-        </span>
-        <h1 class="hero__title">João Victor Carvalho</h1>
-        <p class="hero__subtitle">Desenvolvedor Front-End</p>
-        <div class="hero__typing" aria-live="polite">
-          <span id="typing-text" class="hero__typing-text"></span>
+        <!-- Background: imagem estática (LCP) + vídeo injetado via JS após window.load -->
+        <div class="hero__background" id="hero-bg-container" aria-hidden="true">
+          <img
+            src="assets/images/background.webp"
+            alt=""
+            class="hero__bg-media hero__bg-image"
+            fetchpriority="high"
+          />
         </div>
-        <div class="hero__cta-group">
-          <a
-            href="#contato"
-            class="hero__cta-button"
-            aria-label="Iniciar conversa — ir para seção de contato"
+
+        <!-- Conteúdo da Hero (z-index: 1 para sobrepor o background) -->
+        <div class="hero__content">
+          <span
+            class="hero__badge"
+            aria-label="Status: disponível para novos projetos"
           >
-            Vamos Conversar
-            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </a>
-          <a
-            href="#projetos"
-            class="hero__cta-button hero__cta-button--outline"
-            aria-label="Ver projetos em destaque"
-          >
-            Ver Projetos
-          </a>
+            Disponível para projetos
+          </span>
+          <h1 class="hero__title">João Victor Carvalho</h1>
+          <p class="hero__subtitle">Desenvolvedor Front-End</p>
+          <div class="hero__typing" aria-live="polite">
+            <span id="typing-text" class="hero__typing-text"></span>
+          </div>
+          <div class="hero__cta-group">
+            <a
+              href="#contato"
+              class="hero__cta-button"
+              aria-label="Iniciar conversa — ir para seção de contato"
+            >
+              Vamos Conversar
+              <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
+            <a
+              href="#projetos"
+              class="hero__cta-button hero__cta-button--outline"
+              aria-label="Ver projetos em destaque"
+            >
+              Ver Projetos
+            </a>
+          </div>
         </div>
       </section>
 
@@ -210,14 +231,18 @@
             </p>
 
             <!-- Stats Cards -->
-            <div class="about__stats" aria-label="Indicadores de impacto profissional">
+            <div
+              class="about__stats"
+              aria-label="Indicadores de impacto profissional"
+            >
               <div class="about__stat">
                 <span
                   class="about__stat-value"
                   data-count="9"
                   data-prefix="+"
                   aria-label="Mais de 9 Sprints Ágeis com 100% de previsibilidade nas entregas"
-                >+9</span>
+                  >+9</span
+                >
                 <span class="about__stat-label">Sprints<br />Ágeis</span>
               </div>
               <div class="about__stat">
@@ -226,8 +251,11 @@
                   data-count="4"
                   data-prefix="+"
                   aria-label="Mais de 4 Módulos Core entregues em produção"
-                >+4</span>
-                <span class="about__stat-label">Módulos<br />Core Entregues</span>
+                  >+4</span
+                >
+                <span class="about__stat-label"
+                  >Módulos<br />Core Entregues</span
+                >
               </div>
               <div class="about__stat">
                 <span
@@ -235,8 +263,11 @@
                   data-count="29"
                   data-prefix="+"
                   aria-label="Mais de 29 gargalos e bugs críticos resolvidos"
-                >+29</span>
-                <span class="about__stat-label">Gargalos &amp;<br />Bugs Resolvidos</span>
+                  >+29</span
+                >
+                <span class="about__stat-label"
+                  >Gargalos &amp;<br />Bugs Resolvidos</span
+                >
               </div>
               <div class="about__stat">
                 <span
@@ -245,8 +276,11 @@
                   data-prefix="R$"
                   data-suffix="M+"
                   aria-label="R$ 3 milhões ou mais em volume de dados fiscais processados"
-                >R$ 3M+</span>
-                <span class="about__stat-label">Dados Fiscais<br />Processados</span>
+                  >R$ 3M+</span
+                >
+                <span class="about__stat-label"
+                  >Dados Fiscais<br />Processados</span
+                >
               </div>
             </div>
 
@@ -266,9 +300,11 @@
       <section id="projetos" class="projects" aria-label="Projetos em destaque">
         <h2 class="section-title">Projetos em Destaque</h2>
         <div class="projects__grid projects__grid--two-col">
-
           <!-- Card 1: Talent Metrics -->
-          <article class="project-card project-card--flagship" aria-label="Projeto Talent Metrics">
+          <article
+            class="project-card project-card--flagship"
+            aria-label="Projeto Talent Metrics"
+          >
             <div class="project-card__header">
               <div class="project-card__logo-row">
                 <img
@@ -282,18 +318,24 @@
                 <span class="project-card__type">SaaS B2B · IA</span>
               </div>
               <div class="project-card__meta">
-                <p class="project-card__subtitle">Plataforma de Triagem com IA para RH</p>
+                <p class="project-card__subtitle">
+                  Plataforma de Triagem com IA para RH
+                </p>
               </div>
             </div>
             <div class="project-card__body">
               <p class="project-card__description">
-                Plataforma B2B para times de RH com triagem automatizada de currículos via IA.
-                Landing Page institucional de alta conversão e playground interativo com
-                parsing client-side de PDFs, inferência em tempo real com
-                <strong>Groq AI (Llama 3.3 70B)</strong>, relatórios de fit e histórico
-                de candidatos persistido localmente.
+                Plataforma B2B para times de RH com triagem automatizada de
+                currículos via IA. Landing Page institucional de alta conversão
+                e playground interativo com parsing client-side de PDFs,
+                inferência em tempo real com
+                <strong>Groq AI (Llama 3.3 70B)</strong>, relatórios de fit e
+                histórico de candidatos persistido localmente.
               </p>
-              <div class="project-card__tags" aria-label="Tecnologias utilizadas">
+              <div
+                class="project-card__tags"
+                aria-label="Tecnologias utilizadas"
+              >
                 <span class="project-card__tag">Next.js 16</span>
                 <span class="project-card__tag">TypeScript</span>
                 <span class="project-card__tag">Tailwind CSS</span>
@@ -328,7 +370,10 @@
           </article>
 
           <!-- Card 2: Axiom ERP -->
-          <article class="project-card project-card--flagship" aria-label="Projeto Axiom ERP">
+          <article
+            class="project-card project-card--flagship"
+            aria-label="Projeto Axiom ERP"
+          >
             <div class="project-card__header">
               <div class="project-card__logo-row">
                 <img
@@ -339,21 +384,29 @@
                   height="45"
                   loading="lazy"
                 />
-                <span class="project-card__type">ERP Corporativo · Supply Chain</span>
+                <span class="project-card__type"
+                  >ERP Corporativo · Supply Chain</span
+                >
               </div>
               <div class="project-card__meta">
-                <p class="project-card__subtitle">Suíte B2B de Supply Chain &amp; Tesouraria</p>
+                <p class="project-card__subtitle">
+                  Suíte B2B de Supply Chain &amp; Tesouraria
+                </p>
               </div>
             </div>
             <div class="project-card__body">
               <p class="project-card__description">
-                Sistema corporativo de alta densidade para gestão de estoque multi-armazém
-                e fluxo financeiro. Reatividade granular com <strong>Angular Signals</strong>,
-                persistência NoSQL local com <strong>Dexie.js (IndexedDB)</strong>,
-                DataGrid a <strong>60 FPS</strong> via CDK Virtual Scroll (1.000+ itens)
-                e Command Palette global (<kbd>Ctrl + K</kbd>).
+                Sistema corporativo de alta densidade para gestão de estoque
+                multi-armazém e fluxo financeiro. Reatividade granular com
+                <strong>Angular Signals</strong>, persistência NoSQL local com
+                <strong>Dexie.js (IndexedDB)</strong>, DataGrid a
+                <strong>60 FPS</strong> via CDK Virtual Scroll (1.000+ itens) e
+                Command Palette global (<kbd>Ctrl + K</kbd>).
               </p>
-              <div class="project-card__tags" aria-label="Tecnologias utilizadas">
+              <div
+                class="project-card__tags"
+                aria-label="Tecnologias utilizadas"
+              >
                 <span class="project-card__tag">Angular v22+</span>
                 <span class="project-card__tag">TypeScript</span>
                 <span class="project-card__tag">@ngrx/signals</span>
@@ -390,15 +443,24 @@
       </section>
 
       <!-- Habilidades -->
-      <section id="habilidades" class="skills" aria-label="Matriz de habilidades técnicas">
+      <section
+        id="habilidades"
+        class="skills"
+        aria-label="Matriz de habilidades técnicas"
+      >
         <h2 class="section-title">Stack Técnica</h2>
         <div class="skills__container">
-
           <!-- Pilar 1: Linguagens & Core -->
           <div class="skill-category">
             <h3 class="skill-category__title">Linguagens &amp; Core</h3>
-            <div class="skill-category__badges" role="list" aria-label="Linguagens e tecnologias core">
-              <span class="skill-badge skill-badge--highlight" role="listitem">TypeScript</span>
+            <div
+              class="skill-category__badges"
+              role="list"
+              aria-label="Linguagens e tecnologias core"
+            >
+              <span class="skill-badge skill-badge--highlight" role="listitem"
+                >TypeScript</span
+              >
               <span class="skill-badge" role="listitem">JavaScript (ES6+)</span>
               <span class="skill-badge" role="listitem">HTML5 Semântico</span>
               <span class="skill-badge" role="listitem">CSS3 Moderno</span>
@@ -409,9 +471,17 @@
           <!-- Pilar 2: Frameworks & Libs -->
           <div class="skill-category">
             <h3 class="skill-category__title">Frameworks &amp; Libs</h3>
-            <div class="skill-category__badges" role="list" aria-label="Frameworks e bibliotecas">
-              <span class="skill-badge skill-badge--highlight" role="listitem">Angular (Signals)</span>
-              <span class="skill-badge skill-badge--highlight" role="listitem">Next.js (App Router)</span>
+            <div
+              class="skill-category__badges"
+              role="list"
+              aria-label="Frameworks e bibliotecas"
+            >
+              <span class="skill-badge skill-badge--highlight" role="listitem"
+                >Angular (Signals)</span
+              >
+              <span class="skill-badge skill-badge--highlight" role="listitem"
+                >Next.js (App Router)</span
+              >
               <span class="skill-badge" role="listitem">React.js</span>
               <span class="skill-badge" role="listitem">RxJS</span>
               <span class="skill-badge" role="listitem">@ngrx/signals</span>
@@ -422,27 +492,49 @@
           <!-- Pilar 3: Estilização & Design -->
           <div class="skill-category">
             <h3 class="skill-category__title">Estilização &amp; Design</h3>
-            <div class="skill-category__badges" role="list" aria-label="Ferramentas de estilização e design">
-              <span class="skill-badge skill-badge--highlight" role="listitem">Tailwind CSS</span>
-              <span class="skill-badge skill-badge--highlight" role="listitem">SCSS/Sass</span>
+            <div
+              class="skill-category__badges"
+              role="list"
+              aria-label="Ferramentas de estilização e design"
+            >
+              <span class="skill-badge skill-badge--highlight" role="listitem"
+                >Tailwind CSS</span
+              >
+              <span class="skill-badge skill-badge--highlight" role="listitem"
+                >SCSS/Sass</span
+              >
               <span class="skill-badge" role="listitem">Design Systems</span>
               <span class="skill-badge" role="listitem">Tokens Semânticos</span>
               <span class="skill-badge" role="listitem">Grade Modular 4px</span>
               <span class="skill-badge" role="listitem">Mobile-First</span>
-              <span class="skill-badge" role="listitem">Flexbox &amp; CSS Grid</span>
+              <span class="skill-badge" role="listitem"
+                >Flexbox &amp; CSS Grid</span
+              >
               <span class="skill-badge" role="listitem">Figma</span>
             </div>
           </div>
 
           <!-- Pilar 4: Qualidade, Arquitetura & DevOps -->
           <div class="skill-category">
-            <h3 class="skill-category__title">Qualidade, Arquitetura &amp; DevOps</h3>
-            <div class="skill-category__badges" role="list" aria-label="Ferramentas de qualidade, arquitetura e DevOps">
-              <span class="skill-badge skill-badge--highlight" role="listitem">Vitest</span>
+            <h3 class="skill-category__title">
+              Qualidade, Arquitetura &amp; DevOps
+            </h3>
+            <div
+              class="skill-category__badges"
+              role="list"
+              aria-label="Ferramentas de qualidade, arquitetura e DevOps"
+            >
+              <span class="skill-badge skill-badge--highlight" role="listitem"
+                >Vitest</span
+              >
               <span class="skill-badge" role="listitem">Jest</span>
-              <span class="skill-badge" role="listitem">React Testing Library</span>
+              <span class="skill-badge" role="listitem"
+                >React Testing Library</span
+              >
               <span class="skill-badge" role="listitem">WCAG 2.2 / ARIA</span>
-              <span class="skill-badge" role="listitem">IndexedDB (Dexie.js)</span>
+              <span class="skill-badge" role="listitem"
+                >IndexedDB (Dexie.js)</span
+              >
               <span class="skill-badge" role="listitem">Virtual Scrolling</span>
               <span class="skill-badge" role="listitem">REST APIs</span>
               <span class="skill-badge" role="listitem">Git</span>
@@ -452,7 +544,6 @@
               <span class="skill-badge" role="listitem">Scrum</span>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -566,7 +657,10 @@
       <div class="footer__container">
         <div class="footer__brand">
           <span class="footer__logo">Devictor</span>
-          <p class="footer__tagline">Engenharia Front-End focada em aplicações B2B, performance e ecossistemas modernos.</p>
+          <p class="footer__tagline">
+            Engenharia Front-End focada em aplicações B2B, performance e
+            ecossistemas modernos.
+          </p>
         </div>
         <nav class="footer__nav" aria-label="Navegação do rodapé">
           <a href="#inicio">Início</a>
@@ -576,12 +670,26 @@
           <a href="#contato">Contato</a>
         </nav>
         <div class="footer__socials">
-          <a href="https://github.com/soudevictor" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
-          <a href="https://www.linkedin.com/in/soudevictor/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+          <a
+            href="https://github.com/soudevictor"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            >GitHub</a
+          >
+          <a
+            href="https://www.linkedin.com/in/soudevictor/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            >LinkedIn</a
+          >
         </div>
       </div>
       <div class="footer__bottom">
-        <p>© 2026 João Victor Carvalho de Souza. Todos os direitos reservados.</p>
+        <p>
+          © 2026 João Victor Carvalho de Souza. Todos os direitos reservados.
+        </p>
       </div>
     </footer>
   </body>

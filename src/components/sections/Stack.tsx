@@ -20,11 +20,16 @@ export function Stack() {
           </h2>
         </Reveal>
 
+        {/* Cada Reveal É o <div> que agrupa o par dt/dd — o spec do <dl> exige
+            que o div envoltório contenha dt/dd diretamente, sem aninhar outro. */}
         <dl className="max-w-3xl">
           {stack.map((category, index) => (
-            <Reveal key={category.title} delay={index * 60}>
-              <div className="py-6">
-                <dt className="flex items-baseline gap-3">
+            <Reveal
+              key={category.title}
+              delay={index * 60}
+              className="py-6"
+            >
+              <dt className="flex items-baseline gap-3">
                   <span className="font-medium text-[var(--ink)]">
                     {category.title}
                   </span>
@@ -50,7 +55,6 @@ export function Stack() {
                     ))}
                   </ul>
                 </dd>
-              </div>
             </Reveal>
           ))}
         </dl>

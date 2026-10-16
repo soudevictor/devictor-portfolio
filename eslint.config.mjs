@@ -18,6 +18,9 @@ const eslintConfig = [
       ".next/**",
       "out/**",
       "next-env.d.ts",
+      // Scratch da inspeção (skills do design-taste-frontend): servidores e
+      // relatórios gerados, não fazem parte do código do site.
+      ".taste-skill/**",
     ],
   },
 ];

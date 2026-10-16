@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 
+import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { site } from "@/data/social";
@@ -99,6 +100,7 @@ export default function RootLayout({
         </a>
         <Header />
         <main id="conteudo">{children}</main>
+        <Footer />
         <ThemeToggle />
       </body>
     </html>

@@ -58,15 +58,20 @@ Base: `SPEC.md` + `tasks/plan.md`. Ordem por dependência.
 
 ## Fase 3 — Layout base
 
-- [ ] Task: Header com nav âncora + ThemeToggle
+- [x] Task: Header com nav âncora + ThemeToggle
   - Acceptance: âncoras para inicio/sobre/stack/projetos/contato; foco visível; teclado ok
   - Verify: navegação por Tab manual
   - Files: `src/components/layout/Header.tsx`
 
-- [ ] Task: Footer + primitivos UI (Button, Section, Container, Tag)
+- [x] Task: Footer + primitivos UI (Button, Section, Container, Tag)
   - Acceptance: componentes documentados por uso nas seções seguintes
   - Verify: lint + build
   - Files: `src/components/ui/*`, `src/components/layout/Footer.tsx`
+
+- [x] Task: BrandIcons — SVGs inline de GitHub/LinkedIn/Instagram
+  - Acceptance: lucide-react 1.58 removeu glyphs de marca; SVGs próprios com `currentColor`, `aria-hidden`
+  - Verify: `tsc --noEmit` + lint limpos
+  - Files: `src/components/ui/BrandIcons.tsx`
 
 ## Fase 4 — Seções (design via design-taste-frontend draw.mjs + frontend-design)
 

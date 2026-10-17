@@ -1,34 +1,68 @@
 {
   "name": "devictor-portfolio",
   "version": "2.0.0",
-  "description": "Portfólio pessoal de João Victor Carvalho, construído com HTML, CSS, Sass e JavaScript vanilla, com animações em GSAP, efeito de digitação com Typed.js, ícones via Font Awesome e formulário enviado pelo Web3Forms.",
+  "private": true,
+  "description": "Portfólio pessoal de João Victor Carvalho — Desenvolvedor Full-Stack. Next.js 15, React 19, TypeScript, Tailwind CSS v4.",
   "scripts": {
-    "sass": "node node_modules/sass/sass.js assets/styles/sass/index.scss assets/styles/css/style.css --watch --silence-deprecation=import",
-    "sass:build": "node node_modules/sass/sass.js assets/styles/sass/index.scss assets/styles/css/style.css --no-source-map --silence-deprecation=import",
-    "build": "npm run sass:build"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,json,css}\"",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/soudevictor/devictor-portfolio"
+    "url": "https://github.com/0Carvalh0/site-portfolio-html-css"
   },
   "keywords": [
     "portfolio",
-    "front-end",
-    "html",
-    "css",
-    "sass",
-    "javascript",
-    "gsap",
-    "typed.js",
-    "font-awesome"
+    "full-stack",
+    "react",
+    "nextjs",
+    "typescript",
+    "tailwindcss"
   ],
   "author": "João Victor Carvalho de Souza",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/soudevictor/devictor-portfolio/issues"
+    "url": "https://github.com/0Carvalh0/site-portfolio-html-css/issues"
   },
   "homepage": "https://soudevictor.vercel.app/",
+  "dependencies": {
+    "@hookform/resolvers": "^5.9.1",
+    "geist": "^1.8.1",
+    "lucide-react": "^1.58.0",
+    "next": "^15.5.28",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-hook-form": "^7.90.0",
+    "zod": "^4.6.7"
+  },
   "devDependencies": {
-    "sass": "^1.101.0"
+    "@eslint/eslintrc": "^3.3.7",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "axe-core": "^4.14.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.28",
+    "jsdom": "^30.1.3",
+    "postcss": "^8.5.30",
+    "prettier": "^3.9.10",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.5",
+    "vitest-axe": "^0.1.0"
+  },
+  "allowScripts": {
+    "unrs-resolver@1.12.2": true
   }
 }

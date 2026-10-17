@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+/* Tema por classe: o script no <head> põe `.dark` no <html>. Isto liga as
+   variants `dark:` do Tailwind à classe (e não a `prefers-color-scheme`), para
+   os raros casos em que o *conteúdo* muda com o tema — hoje, só a logo da
+   marca. Todo o resto continua resolvido pelos tokens abaixo. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ========================================================================
+   Design tokens — portfólio Devictor
+   Um solo, uma tinta, um acento. Temas claro/escuro como cidadãos de
+   primeira classe, sem flash (o script no <head> aplica a classe antes da
+   hidratação). Todos os componentes referenciam só estas variáveis.
+   ======================================================================== */
+
+@theme {
+  /* Tipografia — uma família com peso e largura; tabular para números. */
+  --font-sans: var(--font-sans-stack);
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-7xl: 4.5rem;
+
+  /* Rampa de espaço — margens apertadas, seções com vão largo. */
+  --spacing-section: 8rem;
+  --radius-card: 0.5rem;
+}
+
+:root {
+  /* Familias via geist (next/font/local): self-hosted, sem render-blocking. */
+  --font-sans-stack: var(--font-geist-sans), system-ui, sans-serif;
+
+  /* --- tema claro — cobalto sobre papel frio --- */
+  --ground: #f8fafc;
+  --ink: #0f172a;
+  --ink-soft: #475569;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  /* Fundo de botão: mais escuro que o accent de texto, para o rótulo branco
+     passar em 4.5:1 (AA). */
+  --accent-fill: #1d4ed8;
+  --accent-fill-hover: #1e40af;
+  --accent-contrast: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #eef2f7;
+  --border: #d8e0ea;
+
+  --focus: var(--accent);
+}
+
+.dark {
+  /* --- tema escuro — cobalto sobre preto profundo --- */
+  --ground: #09090b;
+  --ink: #f8fafc;
+  --ink-soft: #94a3b8;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  /* O accent de texto é claro (legível no escuro); o fill do botão fica em
+     #2563eb para o branco passar em 4.5:1. */
+  --accent-fill: #2563eb;
+  --accent-fill-hover: #1d4ed8;
+  --accent-contrast: #ffffff;
+  --surface: #11141b;
+  --surface-2: #181d27;
+  --border: #222734;
+
+  --focus: var(--accent);
+}
+
+/* Respeita quem prefere menos movimento — desliga as travel, mantém conteúdo. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Caret do typewriter: blink hard de terminal, não um fade decorativo. */
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Reveal por seção (sobe + aparece). Visível por padrão: sem JS nada fica
+   oculto. Com a classe `js` (aplicada no <head>), o bloco começa escondido e o
+   IntersectionObserver do React marca `is-in` para revelar — sem flash de
+   "aparece, some, reaparece". */
+[data-reveal] {
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal]:not(.is-in) {
+  opacity: 0;
+  transform: translateY(1rem);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--ground);
+  color: var(--ink);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Foco visível consistente e com contraste — nada de outline removido. */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--accent-contrast);
+}
+
+/* Âncoras: a barra fixa não pode cobrir o título da seção. */
+[id] {
+  scroll-margin-top: 5rem;
+}

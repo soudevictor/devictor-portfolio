@@ -123,7 +123,7 @@ Base: `SPEC.md` + `tasks/plan.md`. Ordem por dependência.
 
 - [x] Task: Vitest + Testing Library + axe nos componentes interativos
   - Acceptance: Header, ThemeToggle, Contact form, useTypewriter testados; axe sem violações A/AA críticas
-  - Verify: `npm run test` verde (27 testes)
+  - Verify: `npm run test` verde (32 testes após a Fase 7)
   - Files: `tests/*`, `vitest.config.ts`
 
 - [x] Task: Lint/format/build limpos
@@ -141,3 +141,62 @@ Base: `SPEC.md` + `tasks/plan.md`. Ordem por dependência.
   - Acceptance: site no ar, domínio apontando, formulário enviando em produção, `legacy/` removido do repo
   - Verify: produção navegável + form testado em produção
   - Files: `legacy/` (removido), config Vercel se necessário
+
+## Fase 7 — Acabamentos (revisão de conformidade com a SPEC)
+
+Auditoria de conformidade revelou déficits de acabamento. Base: `SPEC.md` (atualizada) + Boundaries.
+
+- [x] Task: Nome acessível em todas as seções (landmarks rotuladas)
+  - Acceptance: cada `<section>` tem `aria-labelledby` apontando para o id do seu título; teste garante o par id↔label
+  - Verify: `npm run test` (novo teste de landmarks) + axe sem violações
+  - Files: `src/components/sections/Hero.tsx`, `About.tsx`, `Stack.tsx`, `Projects.tsx`, `Contact.tsx`, `tests/a11y.test.tsx`
+  - Note: `inicio-title` no h1 do Hero; as demais seções apontam para o h2 existente. +5 testes (`it.each`) verificam o par id↔label.
+
+- [x] Task: Remover código morto e dependência não usada
+  - Acceptance: `Section.tsx` removido (Hero não pode usá-lo); `Tag.tsx` passa a ser usado em Stack/Projetos; `motion` removido do `package.json` e do lockfile
+  - Verify: `grep` sem referências órfãs; `npm run lint && npm run build`
+  - Files: `src/components/ui/Section.tsx` (removido), `src/components/ui/Tag.tsx`, `src/components/sections/Stack.tsx`, `package.json`
+  - Note: `Tag` ganhou a prop `raised` (fundo `--surface`) para viver sobre a seção em `--surface-2` (Projetos) sem sumir.
+
+- [x] Task: Projetos — sem eyebrow, com tags de categoria e ordenação
+  - Acceptance: o `kind` deixa de ficar acima do `<h3>`; `category` vira chip; `featured` ordena a lista; campo `logo` removido (sem consumidor)
+  - Verify: `inspect.mjs` sem FAIL (eyebrows: 0); screenshots revisados
+  - Files: `src/components/sections/Projects.tsx`, `src/data/projects.ts`, `public/images/thumbnails/*` (removidos)
+  - Note: `inspect.mjs` → 0 FAIL / 0 WARN; screenshots confirmam o chip "Front-end" (acento) e o `kind` abaixo do título.
+
+- [x] Task: Atualizar `SPEC.md` com as decisões (spec viva)
+  - Acceptance: Motion→Reveal, modelo de `Project` (`screenshot`, sem `logo`), consumo de `category`/`featured`, primitivos UI, e Decisions log registrados
+  - Verify: leitura do diff do `SPEC.md`
+  - Files: `SPEC.md`
+
+## Fase 8 — Acabamentos (logos, retrato e palco)
+
+Segunda rodada, sobre mudanças do autor no diretório de trabalho (logos SVG, `img01.webp`, Instagram removido, `legacy/` apagado).
+
+- [x] Task: Logo da marca por tema no Header e Footer
+  - Acceptance: Header e Footer usam `Devictor_LogoPreta.svg` no claro e `Devictor_LogoBranca.svg` no escuro; nome acessível preservado
+  - Verify: `inspect.mjs` (render escuro) + CSS compilado com `.dark\:block` / `.dark\:hidden:where(.dark,.dark *)`
+  - Files: `src/components/layout/Header.tsx`, `Footer.tsx`, `src/styles/globals.css`
+  - Note: Tailwind v4 por classe — `@custom-variant dark (&:where(.dark, .dark *))` liga `dark:` à classe `.dark`. Os dois SVGs ficam no DOM (um visível por tema); o nome acessível vive no `aria-label` do link.
+
+- [x] Task: Retrato otimizado — `img01.jpeg` → `img01.webp`
+  - Acceptance: nenhuma referência a `img01.jpeg`; metadata OG/Twitter com as dimensões reais (1024×1024)
+  - Verify: `grep img01` sem `.jpeg`; build de metadata OK
+  - Files: `src/app/layout.tsx`, `src/components/sections/Stage.tsx`
+  - Note: `img01.jpeg` não existia no repo (imagem quebrada); o arquivo real é `public/images/img01.webp`.
+
+- [x] Task: Palco estático — sem troca de mídia no scroll
+  - Acceptance: o palco não alterna mais entre retrato, `background.mp4` e screenshots; uma única imagem fixa
+  - Verify: `inspect.mjs` + leitura do código (sem IntersectionObserver no Stage)
+  - Files: `src/components/sections/Stage.tsx`
+  - Note: o Stage deixou de ser client component (−~8 kB de JS; First Load 150→149 kB). `background.mp4`/`background.webp` ficam sem uso, documentados como candidatos a mídia futura.
+
+- [x] Task: Corrigir tipo após remoção do Instagram
+  - Acceptance: build verde; `SocialLink.icon` alinhado aos ícones em uso
+  - Verify: `npm run build`
+  - Files: `src/data/social.ts`
+  - Note: o autor removeu o Instagram do rodapé; a união ainda incluía `"instagram"`, quebrando `icons[link.icon]`. `InstagramIcon` segue em `BrandIcons.tsx`.
+
+### Pendências de mídia (ideias — não bloqueiam código)
+- `inspect.mjs` acusa `few-pictures` (3 imagens reais: retrato + 2 screenshots) e `no-footage`.
+- Para limpar: mais screenshots reais por projeto (hero + detalhe) e/ou um clipe curto e honesto de um produto em uso (720p, mudo, ~1 MB, com poster). Ideias detalhadas no comentário de `Stage.tsx`.

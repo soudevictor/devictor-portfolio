@@ -78,3 +78,21 @@ describe("acessibilidade (axe)", () => {
     await expectNoViolations(container);
   });
 });
+
+describe("landmarks nomeadas (aria-labelledby)", () => {
+  const cases = [
+    { el: <Hero />, titleId: "inicio-title" },
+    { el: <About />, titleId: "sobre-title" },
+    { el: <Stack />, titleId: "stack-title" },
+    { el: <Projects />, titleId: "projetos-title" },
+    { el: <Contact />, titleId: "contato-title" },
+  ];
+
+  it.each(cases)("a seção aponta para $titleId", ({ el, titleId }) => {
+    const { container } = render(el);
+    const section = container.querySelector("section");
+
+    expect(section).toHaveAttribute("aria-labelledby", titleId);
+    expect(container.querySelector(`#${titleId}`)).toBeInTheDocument();
+  });
+});

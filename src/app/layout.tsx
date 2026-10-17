@@ -37,9 +37,9 @@ export const metadata: Metadata = {
     description: site.description,
     images: [
       {
-        url: "/images/img01.jpeg",
-        width: 512,
-        height: 512,
+        url: "/images/img01.webp",
+        width: 1024,
+        height: 1024,
         alt: `${site.name}, Desenvolvedor Full-Stack`,
       },
     ],
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: site.name,
     description: site.description,
-    images: ["/images/img01.jpeg"],
+    images: ["/images/img01.webp"],
   },
   icons: {
     icon: [{ url: "/favicon.ico" }],

@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { Tag } from "@/components/ui/Tag";
 import { stack } from "@/data/stack";
 
 /**
@@ -9,7 +10,7 @@ import { stack } from "@/data/stack";
  */
 export function Stack() {
   return (
-    <section id="stack" className="py-16 md:py-24">
+    <section id="stack" aria-labelledby="stack-title" className="py-16 md:py-24">
       <Container>
         <Reveal>
           <h2
@@ -24,37 +25,26 @@ export function Stack() {
             que o div envoltório contenha dt/dd diretamente, sem aninhar outro. */}
         <dl className="max-w-3xl">
           {stack.map((category, index) => (
-            <Reveal
-              key={category.title}
-              delay={index * 60}
-              className="py-6"
-            >
+            <Reveal key={category.title} delay={index * 60} className="py-6">
               <dt className="flex items-baseline gap-3">
-                  <span className="font-medium text-[var(--ink)]">
-                    {category.title}
+                <span className="font-medium text-[var(--ink)]">
+                  {category.title}
+                </span>
+                {category.inProgress && (
+                  <span className="text-sm text-[var(--accent)]">
+                    em progresso
                   </span>
-                  {category.inProgress && (
-                    <span className="text-sm text-[var(--accent)]">
-                      em progresso
-                    </span>
-                  )}
-                </dt>
-                <dd className="mt-3">
-                  <ul className="flex flex-wrap gap-2">
-                    {category.items.map((item) => (
-                      <li
-                        key={item.name}
-                        className={`rounded px-2.5 py-1 text-sm ${
-                          item.highlight
-                            ? "bg-[var(--accent)]/12 font-medium text-[var(--accent)]"
-                            : "bg-[var(--surface-2)] text-[var(--ink-soft)]"
-                        }`}
-                      >
-                        {item.name}
-                      </li>
-                    ))}
-                  </ul>
-                </dd>
+                )}
+              </dt>
+              <dd className="mt-3">
+                <ul className="flex flex-wrap gap-2">
+                  {category.items.map((item) => (
+                    <Tag key={item.name} highlight={item.highlight}>
+                      {item.name}
+                    </Tag>
+                  ))}
+                </ul>
+              </dd>
             </Reveal>
           ))}
         </dl>

@@ -18,8 +18,6 @@ export interface Project {
   /** Rótulo do tipo exibido no card (ex.: "SaaS B2B · IA"). */
   kind: string;
   stack: string[];
-  /** URL do logo/thumbnail em `public/`. */
-  logo?: string;
   /** Screenshot real da interface no ar, em `public/images/work/`. */
   screenshot?: string;
   repoUrl?: string;
@@ -45,7 +43,6 @@ export const projects: Project[] = [
       "Zod",
       "Vitest",
     ],
-    logo: "/images/thumbnails/talentmetricsLogo.svg",
     screenshot: "/images/work/talentmetrics.webp",
     liveUrl: "https://talent-metrics-landing.vercel.app/",
     repoUrl: "https://github.com/soudevictor/talent-metrics-landing",
@@ -67,7 +64,6 @@ export const projects: Project[] = [
       "CDK Virtual Scroll",
       "Vitest",
     ],
-    logo: "/images/thumbnails/axiomerpLogo.svg",
     screenshot: "/images/work/axiomerp.webp",
     liveUrl: "https://axiomerp.vercel.app/",
     repoUrl: "https://github.com/soudevictor/axiom-erp",

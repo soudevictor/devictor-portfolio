@@ -1,8 +1,8 @@
+import Image from "next/image";
 import { Mail } from "lucide-react";
 
 import {
   GitHubIcon,
-  InstagramIcon,
   LinkedInIcon,
 } from "@/components/ui/BrandIcons";
 import { Container } from "@/components/ui/Container";
@@ -11,24 +11,35 @@ import { sections, site, social } from "@/data/social";
 const icons = {
   github: GitHubIcon,
   linkedin: LinkedInIcon,
-  instagram: InstagramIcon,
   mail: Mail,
 } as const;
 
 /**
- * Fecho desenhado da página: o nome volta em largura total como âncora
- * visual, com a navegação e os sociais ao redor. Não é um sitemap.
+ * Fecho desenhado da página: a logo volta em largura total como âncora visual,
+ * com a navegação e os sociais ao redor. Não é um sitemap. A logo segue o tema
+ * (preta no claro, branca no escuro) e é decorativa — o nome já vem do Header e
+ * da linha de copyright.
  */
 export function Footer() {
   return (
     <footer className="bg-[var(--ground)] py-14">
       <Container>
-        <p
-          aria-hidden="true"
-          className="text-5xl font-semibold tracking-tight text-[var(--ink)] md:text-7xl"
-        >
-          {site.shortName}
-        </p>
+        <div aria-hidden="true">
+          <Image
+            src="/images/logos/Devictor_LogoPreta.svg"
+            alt=""
+            width={936}
+            height={355}
+            className="h-12 w-auto dark:hidden md:h-20"
+          />
+          <Image
+            src="/images/logos/Devictor_LogoBranca.svg"
+            alt=""
+            width={937}
+            height={356}
+            className="hidden h-12 w-auto dark:block md:h-20"
+          />
+        </div>
 
         <p className="mt-4 max-w-md text-[var(--ink-soft)]">
           {site.role}, construindo interfaces com o pé no back-end.

@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* Tema por classe: o script no <head> põe `.dark` no <html>. Isto liga as
+   variants `dark:` do Tailwind à classe (e não a `prefers-color-scheme`), para
+   os raros casos em que o *conteúdo* muda com o tema — hoje, só a logo da
+   marca. Todo o resto continua resolvido pelos tokens abaixo. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ========================================================================
    Design tokens — portfólio Devictor
    Um solo, uma tinta, um acento. Temas claro/escuro como cidadãos de

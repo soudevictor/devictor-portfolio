@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -7,7 +8,7 @@ import { Container } from "@/components/ui/Container";
 import { sections, site } from "@/data/social";
 
 /**
- * Barra de navegação: wordmark, links âncora e uma ação. Sem "chrome"
+ * Barra de navegação: logo, links âncora e uma ação. Sem "chrome"
  * desnecessário, sem vidro/flutuante — uma barra simples e sólida.
  * No mobile os links viram um painel simples.
  */
@@ -18,11 +19,31 @@ export function Header() {
     <header className="fixed inset-x-0 top-0 z-40 bg-[var(--surface-2)]">
       <Container>
         <div className="flex items-center justify-between py-4">
+          {/* A logo troca com o tema: a preta sobre o fundo claro, a branca
+              sobre o escuro. Os dois SVGs ficam no DOM e o CSS mostra um só —
+              por isso o nome acessível vive no `aria-label` do link, não em
+              cada imagem (que fica decorativa). */}
           <a
             href="#inicio"
-            className="text-lg font-semibold tracking-tight text-[var(--ink)]"
+            aria-label={site.shortName}
+            className="inline-flex items-center"
           >
-            {site.shortName}
+            <Image
+              src="/images/logos/Devictor_LogoPreta.svg"
+              alt=""
+              width={936}
+              height={355}
+              priority
+              className="h-7 w-auto dark:hidden"
+            />
+            <Image
+              src="/images/logos/Devictor_LogoBranca.svg"
+              alt=""
+              width={937}
+              height={356}
+              priority
+              className="hidden h-7 w-auto dark:block"
+            />
           </a>
 
           {/* Nav em telas médias+ */}

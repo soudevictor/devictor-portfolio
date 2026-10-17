@@ -21,9 +21,13 @@ export function Hero() {
   return (
     <section
       id="inicio"
+      aria-labelledby="inicio-title"
       className="flex flex-col justify-center pb-16 pt-28 lg:min-h-[100svh] lg:py-24"
     >
-      <h1 className="text-[clamp(2.75rem,7vw,4.5rem)] font-semibold leading-[0.95] tracking-tight text-[var(--ink)]">
+      <h1
+        id="inicio-title"
+        className="text-[clamp(2.75rem,7vw,4.5rem)] font-semibold leading-[0.95] tracking-tight text-[var(--ink)]"
+      >
         {site.name}
       </h1>
 

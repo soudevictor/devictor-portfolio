@@ -10,7 +10,7 @@ import { copy, site, stats } from "@/data/social";
  */
 export function About() {
   return (
-    <section id="sobre" className="py-16 md:py-24">
+    <section id="sobre" aria-labelledby="sobre-title" className="py-16 md:py-24">
       <Container>
         <div className="max-w-[46ch]">
           <h2 id="sobre-title" className="sr-only">

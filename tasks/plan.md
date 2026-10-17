@@ -7,9 +7,9 @@ Spec de referência: `SPEC.md` (aprovada em 2026-10-16).
 ```
 Fundação (scaffold, tokens, tema)
   └── Dados (projects.ts, social.ts, copy)
-        └── Componentes UI primitivos (Button, Section, Container, Tag)
+        └── Componentes UI primitivos (Button, Container, Tag)
               └── Seções (Header/Hero/About/Stack/Projects/Contact/Footer)
-                    └── Animações e interações (Motion, typewriter, tema)
+                    └── Animações e interações (Reveal em CSS, typewriter, tema)
                           └── Qualidade (testes, a11y, Lighthouse) → Deploy
 ```
 
@@ -36,7 +36,7 @@ Descoberta ao auditar o site antigo: existe uma seção **"Stack Técnica"** (Li
 - Checkpoint: página completa navegável, visual final nos dois temas.
 
 ### Fase 5 — Motion e polish
-- Animações de entrada por seção (Motion), micro-interações, respeito a `prefers-reduced-motion`.
+- Animações de entrada por seção (`Reveal` em CSS + IntersectionObserver), micro-interações, respeito a `prefers-reduced-motion`.
 - Checkpoint: animações suaves, zero jank, redução de movimento respeitada.
 
 ### Fase 6 — Qualidade e deploy

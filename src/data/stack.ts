@@ -26,7 +26,6 @@ export const stack: StackCategory[] = [
       { name: "JavaScript (ES6+)" },
       { name: "HTML5 Semântico" },
       { name: "CSS3 Moderno" },
-      { name: "SQL" },
     ],
   },
   {
@@ -34,10 +33,9 @@ export const stack: StackCategory[] = [
     items: [
       { name: "Next.js (App Router)", highlight: true },
       { name: "React", highlight: true },
-      { name: "Angular (Signals)" },
+      { name: "Angular (Signals)", highlight: true },
       { name: "@ngrx/signals" },
       { name: "RxJS" },
-      { name: "Vue" },
     ],
   },
   {
@@ -60,6 +58,7 @@ export const stack: StackCategory[] = [
       { name: "PostgreSQL" },
       { name: "Prisma" },
       { name: "Git & CI/CD" },
+      { name: "Docker" },
       { name: "Vercel" },
     ],
   },

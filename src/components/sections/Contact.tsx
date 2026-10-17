@@ -71,7 +71,7 @@ export function Contact() {
     "w-full rounded-md border-0 bg-[var(--surface)] px-4 py-3 text-[var(--ink)] ring-1 ring-inset ring-[var(--border)] placeholder:text-[var(--ink-soft)] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[var(--accent)]";
 
   return (
-    <section id="contato" className="py-16 md:py-24">
+    <section id="contato" aria-labelledby="contato-title" className="py-16 md:py-24">
       <Container>
         <div className="max-w-[46ch]">
           <Reveal>
@@ -170,7 +170,7 @@ export function Contact() {
                   </label>
                   <textarea
                     id="message"
-                    rows={5}
+                    rows={9}
                     aria-invalid={!!errors.message}
                     aria-describedby={
                       errors.message ? "message-error" : undefined

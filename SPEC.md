@@ -18,7 +18,7 @@ Migrar o portfólio pessoal de João Victor Carvalho de HTML/Sass/JS vanilla par
 
 1. **Framework: Next.js 15 (App Router) + TypeScript** — é o padrão de mercado para front-end/React, SSG nativo ideal para portfólio, deploy 1-clique na Vercel. Alternativa seria Vite + React puro; escolhi Next.js pelo SEO e pela narrativa de currículo.
 2. **Estilização: Tailwind CSS v4** — substitui o Sass; padrão de mercado, facilita design system consistente e dark/light mode.
-3. **Animações: Motion (Framer Motion)** em vez de GSAP — integração idiomática com React; Typed.js substituído por um hook/componente próprio de typewriter (~30 linhas, sem dependência).
+3. **Animações: CSS + IntersectionObserver** (componente `Reveal`), sem lib de motion — anima só `transform`/`opacity`, zero JS por frame, e o conteúdo permanece visível sem script (fallback honesto). Typed.js substituído por um hook/componente próprio de typewriter (~30 linhas, sem dependência). *Decisão revisada em 2026-10-16: a suposição original previa Motion (Framer Motion); o custo em bundle/performance para entradas simples não se justificou.*
 4. **Formulário: mantém Web3Forms** como backend de envio (sem servidor próprio), mas com React Hook Form + validação (zod).
 5. **Font Awesome substituído por Lucide React** (ícones SVG tree-shakeable, sem CSS externo).
 6. **Idioma do site: pt-BR** (como hoje). Multilíngue fica fora do escopo.
@@ -41,7 +41,8 @@ interface Project {
   stack: string[];                // ex.: ["Next.js", "Node", "PostgreSQL"]
   repoUrl?: string;
   liveUrl?: string;
-  image: string;
+  /** Screenshot real da interface no ar, em `public/images/work/`. */
+  screenshot?: string;
   featured: boolean;
 }
 ```
@@ -52,7 +53,7 @@ Adicionar o primeiro projeto full-stack no futuro = uma entrada nova nesse array
 
 - Next.js 15 (App Router, static export) + React 19 + TypeScript strict
 - Tailwind CSS v4 (tokens de design via CSS variables, dark/light com `prefers-color-scheme` + toggle persistido)
-- Motion (animações), Lucide React (ícones), React Hook Form + zod + Web3Forms (contato)
+- Animações de entrada em CSS + IntersectionObserver (`Reveal`), Lucide React (ícones), React Hook Form + zod + Web3Forms (contato)
 - ESLint + Prettier; fontes via `next/font` (sem render-blocking)
 
 ## Commands
@@ -76,7 +77,7 @@ src/
     layout/        → Header, Footer, ThemeToggle
   data/            → projects.ts, social.ts (conteúdo tipado)
   hooks/           → useTypewriter, useTheme
-  lib/             → utils, constantes
+  lib/             → schemas de validação (zod)
   styles/          → globals.css (tokens Tailwind)
 public/            → imagens otimizadas (migradas de assets/)
 tests/             → testes unitários (Vitest) e de acessibilidade
@@ -107,7 +108,7 @@ export function ProjectCard({ project, priority = false }: ProjectCardProps) {
 ## Testing Strategy
 
 - **Vitest + Testing Library** para componentes-chave (Header, ThemeToggle, formulário, typewriter).
-- **jest-axe** (ou vitest-axe) para checagem automatizada de acessibilidade por seção.
+- **axe-core** para checagem automatizada de acessibilidade por seção (o contraste é medido no browser pela inspeção, não no jsdom).
 - **Lighthouse CI (local, manual)** antes do deploy — metas abaixo.
 - Cobertura-alvo: componentes interativos 100% testados; não exigir cobertura global.
 
@@ -124,12 +125,26 @@ Referências de norte estético: portfólios consagrados de devs de produto/enge
 ## Success Criteria (mensuráveis)
 
 - Lighthouse (mobile): **Performance ≥ 95, Acessibilidade = 100, Best Practices = 100, SEO = 100**.
-- LCP < 2.0s, CLS < 0.05, INP < 200ms.
+- LCP < 2.0s, CLS < 0.05, INP < 200ms (INP afere-se por proxy de laboratório — TBT — no Lighthouse local, já que exige sessão real).
 - Navegação completa apenas por teclado, com foco visível; leitores de tela anunciam todas as seções (landmarks + labels).
 - Dark/light mode com toggle + respeito a `prefers-color-scheme`, sem flash de tema no carregamento.
 - Zero erros de lint/typecheck; build de produção estático passando.
 - Formulário de contato enviando com sucesso via Web3Forms, com estados de loading/sucesso/erro.
 - Deploy na Vercel em produção, apontando para o domínio atual.
+
+## Decisions log (spec viva)
+
+Alterações feitas após revisão do estado implementado (2026-10-16):
+
+- **Animação:** Motion (Framer Motion) → `Reveal` em CSS + IntersectionObserver. A dependência `motion` foi **removida** do `package.json`.
+- **Modelo de `Project`:** o campo `image` da suposição original virou `screenshot` (interface real no ar). O campo `logo` foi **removido** por não ter consumidor honesto — os logos migrados são wordmarks que duplicariam o título.
+- **Consumo de dados:** `category` (chip de categoria) e `featured` (ordenação) passaram a ser **usados** na seção Projetos, fechando o critério "tags de categoria".
+- **Acessibilidade:** todas as `<section>` ganharam `aria-labelledby` apontando para o título, para virarem landmarks nomeados.
+- **Primitivos UI:** `Section.tsx` foi removido (código morto — o Hero não pode usá-lo); `Tag.tsx` passa a ser usado em Stack e Projetos.
+- **Logo da marca:** Header e Footer passam a usar a logo em vez do wordmark de texto, trocando com o tema — `Devictor_LogoPreta.svg` no claro, `Devictor_LogoBranca.svg` no escuro. Para isso o Tailwind v4 ganhou o variant de classe `@custom-variant dark (&:where(.dark, .dark *))`, que liga `dark:` à classe `.dark` aplicada no `<html>`.
+- **Palco (Stage):** deixou de trocar de mídia conforme a seção entra em vista. Agora é um retrato fixo (`img01.webp`) — sem carrossel involuntário no scroll e sem JS de cliente. `background.mp4`/`background.webp` ficaram sem uso, anotados como candidatos a mídia futura.
+- **Retrato:** `img01.jpeg` (que não existia — imagem quebrada) passou a apontar para `img01.webp`, inclusive na metadata OG/Twitter, agora com as dimensões reais (1024×1024).
+- **Social:** o Instagram foi removido do rodapé; a união `SocialLink.icon` foi alinhada a `"github" | "linkedin" | "mail"`.
 
 ## Open Questions
 

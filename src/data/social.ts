@@ -7,7 +7,7 @@ export interface SocialLink {
   label: string;
   href: string;
   /** Nome curto do ícone Lucide, usado pelo Footer/Contato. */
-  icon: "github" | "linkedin" | "instagram" | "mail";
+  icon: "github" | "linkedin" | "mail";
 }
 
 export const site = {
@@ -25,7 +25,7 @@ export const site = {
 export const social: SocialLink[] = [
   {
     label: "GitHub",
-    href: "https://github.com/0Carvalh0",
+    href: "https://github.com/soudevictor",
     icon: "github",
   },
   {
@@ -34,13 +34,8 @@ export const social: SocialLink[] = [
     icon: "linkedin",
   },
   {
-    label: "Instagram",
-    href: "https://www.instagram.com/soudevictor",
-    icon: "instagram",
-  },
-  {
     label: "E-mail",
-    href: "mailto:contato@soudevictor.dev",
+    href: "mailto:trabalho.joaovictor2004@gmail.com",
     icon: "mail",
   },
 ];

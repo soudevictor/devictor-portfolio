@@ -75,63 +75,67 @@ Base: `SPEC.md` + `tasks/plan.md`. Ordem por dependência.
 
 ## Fase 4 — Seções (design via design-taste-frontend draw.mjs + frontend-design)
 
-- [ ] Task: Rodar `draw.mjs` e registrar direção de arte escolhida em `.taste-skill/`
+- [x] Task: Rodar `draw.mjs` e registrar direção de arte escolhida em `.taste-skill/`
   - Acceptance: direção escolhida justificada contra o inventário do sujeito
   - Verify: direction sheet salva
+  - Note: direção **Experience** (split-stage, retrato fixo à esquerda, coluna de leitura à direita, cobalto `#2563eb` sobre Geist). Decidida contra o inventário: o sujeito é uma pessoa, então o retrato lidera; o clipe legado vira mídia da seção técnica.
 
-- [ ] Task: Hero (typewriter próprio, frases full-stack)
+- [x] Task: Hero (typewriter próprio, frases full-stack)
   - Acceptance: headline curta (≤2 linhas), typewriter com frases full-stack, mídia `background.webp`/`background.mp4` tratada com scrim, fallback sem JS
   - Verify: `lint.mjs` + `inspect.mjs` sem FAIL; screenshots 1440/768/390 revisados
   - Files: `src/components/sections/Hero.tsx`, `src/hooks/useTypewriter.ts`
 
-- [ ] Task: Sobre (foto via `next/image`, bio revisada)
+- [x] Task: Sobre (foto via `next/image`, bio revisada)
   - Acceptance: `img01.jpeg` otimizada, bio revisada com narrativa full-stack, alt text acessível
   - Verify: `lint.mjs` + `inspect.mjs` sem FAIL; screenshots revisados
   - Files: `src/components/sections/About.tsx`
 
-- [ ] Task: Stack Técnica (inclui trilha back-end em progresso)
+- [x] Task: Stack Técnica (inclui trilha back-end em progresso)
   - Acceptance: categorias Linguagens & Core / Frameworks & Libs / Estilização & Design / Back-end & Infra (em progresso), sem cards genéricos de ícones
   - Verify: `lint.mjs` + `inspect.mjs` sem FAIL; screenshots revisados
   - Files: `src/components/sections/Stack.tsx`, `src/data/stack.ts`
 
-- [ ] Task: Projetos (grid, cards com tags de categoria)
+- [x] Task: Projetos (grid, cards com tags de categoria)
   - Acceptance: grid de `projects.ts`, cards distintos por seção (sem grid de cards idênticos), tags de categoria, links repo/live
   - Verify: `lint.mjs` + `inspect.mjs` sem FAIL; screenshots revisados
   - Files: `src/components/sections/Projects.tsx`, `src/components/ui/ProjectCard.tsx`
 
-- [ ] Task: Contato (RHF + zod + Web3Forms; loading/sucesso/erro; link `/curriculo.pdf`)
+- [x] Task: Contato (RHF + zod + Web3Forms; loading/sucesso/erro; link `/curriculo.pdf`)
   - Acceptance: formulário validado por zod, estados loading/sucesso/erro, envio Web3Forms via env var, link para `/curriculo.pdf`
   - Verify: `lint.mjs` + `inspect.mjs` sem FAIL; envio real testado; screenshots revisados
   - Files: `src/components/sections/Contact.tsx`, `src/lib/schemas.ts`
 
 ## Fase 5 — Motion e polish
 
-- [ ] Task: Animações de entrada por seção + assinatura de movimento (Motion)
+- [x] Task: Animações de entrada por seção + assinatura de movimento (Motion)
   - Acceptance: entrance staggered (heading → texto → mídia, 60–90ms, subindo 16–32px), só transform/opacity, ≥8 elementos que movem no load/scroll
   - Verify: `inspect.mjs` sem FAIL de motion; zero jank percebido
-  - Files: `src/components/sections/*`, `src/lib/motion.ts`
+  - Files: `src/components/ui/Reveal.tsx`, `src/components/sections/*`
+  - Note: sem `framer-motion` — `Reveal` usa IntersectionObserver + CSS (`transition` em transform/opacity). Zero JS por frame, e o conteúdo fica visível sem script.
 
-- [ ] Task: `prefers-reduced-motion` respeitado em tudo
+- [x] Task: `prefers-reduced-motion` respeitado em tudo
   - Acceptance: com reduced-motion ativo, conteúdo aparece estático sem travel; typewriter vira texto fixo
   - Verify: DevTools com reduced-motion; inspector + screenshots finais; critique.md (máx. 3 rodadas)
-  - Files: `src/lib/motion.ts`, `src/hooks/useTypewriter.ts`
+  - Files: `src/styles/globals.css`, `src/hooks/useTypewriter.ts`
+  - Note: regra global `transition-duration: 0.01ms` (padrão canônico) em vez de `transition: none` — o navegador ainda dispara `transitionrun`, então a medição de motion continua fiel.
 
 ## Fase 6 — Qualidade e deploy
 
-- [ ] Task: Vitest + Testing Library + axe nos componentes interativos
+- [x] Task: Vitest + Testing Library + axe nos componentes interativos
   - Acceptance: Header, ThemeToggle, Contact form, useTypewriter testados; axe sem violações A/AA críticas
-  - Verify: `npm run test` verde
+  - Verify: `npm run test` verde (27 testes)
   - Files: `tests/*`, `vitest.config.ts`
 
-- [ ] Task: Lint/format/build limpos
+- [x] Task: Lint/format/build limpos
   - Acceptance: zero erros de lint/typecheck; build de produção estático passando
   - Verify: `npm run lint && npm run format && npm run build`
-  - Files: config lint/format se necessário
+  - Files: `eslint.config.mjs` (ignora `.taste-skill/`)
 
-- [ ] Task: Lighthouse local até Perf ≥ 95, A11y/BP/SEO = 100
+- [x] Task: Lighthouse local até Perf ≥ 95, A11y/BP/SEO = 100
   - Acceptance: LCP < 2.0s, CLS < 0.05, INP < 200ms; metas de A11y/BP/SEO batidas
   - Verify: relatório Lighthouse local anexado
   - Files: n/a (medição)
+  - Note: Perf 100 / A11y 100 / BP 100 / SEO 100; LCP 1432–1545ms, CLS 0.0001, TBT 11–18ms (3 rodadas). Correções que sustentam o número: retrato 211→81 KB, screenshots 407→92 KB (PNG→WebP), clipe 807→89 KB (1080p→960x540/CRF29) e o hero fora do `Reveal` (não esconder o elemento LCP atrás de animação). O servidor de inspeção passou a comprimir com brotli e a servir `immutable` em `/_next/static`, como a Vercel — sem isso a medição local enxergava 475 KB de JS onde o usuário real vê ~150 KB.
 
 - [ ] Task: Deploy Vercel em `soudevictor.vercel.app`; remover `legacy/` após validação
   - Acceptance: site no ar, domínio apontando, formulário enviando em produção, `legacy/` removido do repo

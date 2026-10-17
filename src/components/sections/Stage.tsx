@@ -25,8 +25,8 @@ const STAGE_MEDIA: Record<string, StageMedia> = {
     src: "/videos/background.mp4",
     poster: "/images/background.webp",
   },
-  projetos: { kind: "image", src: "/images/work/talentmetrics.png" },
-  contato: { kind: "image", src: "/images/work/axiomerp.png" },
+  projetos: { kind: "image", src: "/images/work/talentmetrics.webp" },
+  contato: { kind: "image", src: "/images/work/axiomerp.webp" },
 };
 
 const ORDERED = ["inicio", "sobre", "stack", "projetos", "contato"];
@@ -100,7 +100,10 @@ export function Stage() {
           >
             {media.kind === "video" ? (
               /* Vídeo atmosférico: muted/loop/inline. Com reduced-motion ou fora
-                 de vista, o poster segura a imagem (sem viajar). */
+                 de vista, o poster segura a imagem (sem viajar). O clipe é
+                 entregue em 960x540/CRF29 (~89 KB, era 807 KB em 1080p): ele
+                 disputa banda com o retrato no primeiro paint e uma decoração
+                 não pode ser o que atrasa o LCP. */
               <video
                 ref={videoRef}
                 className="h-full w-full object-cover"
@@ -108,7 +111,7 @@ export function Stage() {
                 muted
                 loop
                 playsInline
-                preload="auto"
+                preload="metadata"
                 disablePictureInPicture
               >
                 <source src={media.src} type="video/mp4" />

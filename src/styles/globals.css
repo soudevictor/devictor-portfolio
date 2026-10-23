@@ -1,16 +1,14 @@
 @import "tailwindcss";
 
-/* Tema por classe: o script no <head> põe `.dark` no <html>. Isto liga as
-   variants `dark:` do Tailwind à classe (e não a `prefers-color-scheme`), para
-   os raros casos em que o *conteúdo* muda com o tema — hoje, só a logo da
-   marca. Todo o resto continua resolvido pelos tokens abaixo. */
-@custom-variant dark (&:where(.dark, .dark *));
+/* O site é dark-only. Não há `.dark`, `prefers-color-scheme`, toggle nem
+   variantes `dark:`. O script no <head> adiciona apenas `.js`, usado pelo
+   Reveal e pelos fallbacks progressivos. */
+@custom-variant js (&:where(.js, .js *));
 
 /* ========================================================================
    Design tokens — portfólio Devictor
-   Um solo, uma tinta, um acento. Temas claro/escuro como cidadãos de
-   primeira classe, sem flash (o script no <head> aplica a classe antes da
-   hidratação). Todos os componentes referenciam só estas variáveis.
+   Um solo, uma tinta, um acento. Tema escuro fixo; todos os componentes
+   referenciam só estas variáveis.
    ======================================================================== */
 
 @theme {
@@ -28,41 +26,19 @@
   --text-5xl: 3rem;
   --text-6xl: 3.75rem;
   --text-7xl: 4.5rem;
-
-  /* Rampa de espaço — margens apertadas, seções com vão largo. */
-  --spacing-section: 8rem;
-  --radius-card: 0.5rem;
 }
 
 :root {
+  color-scheme: dark;
+
   /* Familias via geist (next/font/local): self-hosted, sem render-blocking. */
   --font-sans-stack: var(--font-geist-sans), system-ui, sans-serif;
 
-  /* --- tema claro — cobalto sobre papel frio --- */
-  --ground: #f8fafc;
-  --ink: #0f172a;
-  --ink-soft: #475569;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  /* Fundo de botão: mais escuro que o accent de texto, para o rótulo branco
-     passar em 4.5:1 (AA). */
-  --accent-fill: #1d4ed8;
-  --accent-fill-hover: #1e40af;
-  --accent-contrast: #ffffff;
-  --surface: #ffffff;
-  --surface-2: #eef2f7;
-  --border: #d8e0ea;
-
-  --focus: var(--accent);
-}
-
-.dark {
-  /* --- tema escuro — cobalto sobre preto profundo --- */
+  /* --- tema escuro fixo — cobalto sobre preto profundo --- */
   --ground: #09090b;
   --ink: #f8fafc;
   --ink-soft: #94a3b8;
   --accent: #3b82f6;
-  --accent-hover: #2563eb;
   /* O accent de texto é claro (legível no escuro); o fill do botão fica em
      #2563eb para o branco passar em 4.5:1. */
   --accent-fill: #2563eb;
@@ -71,6 +47,12 @@
   --surface: #11141b;
   --surface-2: #181d27;
   --border: #222734;
+
+  /* Erro é o único estado fora da paleta de acento; o vermelho claro mantém
+     contraste nos campos e no aviso sobre o fundo escuro. */
+  --danger: #fca5a5;
+  --danger-surface: #2a1215;
+  --danger-border: #7f1d1d;
 
   --focus: var(--accent);
 }
@@ -142,4 +124,12 @@ body {
 /* Âncoras: a barra fixa não pode cobrir o título da seção. */
 [id] {
   scroll-margin-top: 5rem;
+}
+
+/* Impressão/full-page não disparam o observer de forma confiável. */
+@media print {
+  .js [data-reveal]:not(.is-in) {
+    opacity: 1;
+    transform: none;
+  }
 }

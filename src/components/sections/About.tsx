@@ -30,7 +30,7 @@ export function About() {
 
           <Reveal delay={70}>
             <p className="mt-8 text-[var(--ink-soft)]">
-              <span className="italic text-[var(--ink)]">{site.name}</span>
+              <span className="text-[var(--ink)] italic">{site.name}</span>
               <br />
               <span className="text-sm">{site.role}</span>
             </p>
@@ -45,7 +45,7 @@ export function About() {
                 key={s.label}
                 className="grid grid-cols-[104px_1fr] items-baseline gap-6 py-6 md:grid-cols-[132px_1fr]"
               >
-                <dt className="whitespace-nowrap text-right text-2xl font-semibold tabular-nums text-[var(--ink)] md:text-3xl">
+                <dt className="text-right text-2xl font-semibold whitespace-nowrap text-[var(--ink)] tabular-nums md:text-3xl">
                   {s.value}
                 </dt>
                 <dd className="text-[var(--ink-soft)]">{s.label}</dd>

@@ -124,9 +124,7 @@ describe("useTypewriter", () => {
 
     for (let i = 0; i < 30; i++) {
       advance(25);
-      expect(result.current.text.length).toBeLessThanOrEqual(
-        PHRASES[0]!.length,
-      );
+      expect(result.current.text.length).toBeLessThanOrEqual(PHRASES[0]!.length);
     }
   });
 });

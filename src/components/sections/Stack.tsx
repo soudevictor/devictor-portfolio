@@ -5,8 +5,7 @@ import { stack } from "@/data/stack";
 
 /**
  * Stack Técnica — lista agrupada, sem cards (a direction proíbe grids de cards
- * na coluna de leitura). Cada categoria é uma linha com os itens; a trilha
- * back-end aparece marcada como em progresso.
+ * na coluna de leitura). Cada categoria é uma linha com os itens.
  */
 export function Stack() {
   return (
@@ -26,16 +25,7 @@ export function Stack() {
         <dl className="max-w-3xl">
           {stack.map((category, index) => (
             <Reveal key={category.title} delay={index * 60} className="py-6">
-              <dt className="flex items-baseline gap-3">
-                <span className="font-medium text-[var(--ink)]">
-                  {category.title}
-                </span>
-                {category.inProgress && (
-                  <span className="text-sm text-[var(--accent)]">
-                    em progresso
-                  </span>
-                )}
-              </dt>
+              <dt className="font-medium text-[var(--ink)]">{category.title}</dt>
               <dd className="mt-3">
                 <ul className="flex flex-wrap gap-2">
                   {category.items.map((item) => (

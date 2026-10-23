@@ -30,6 +30,11 @@ export function Reveal({
     const el = ref.current;
     if (!el) return;
 
+    if (typeof IntersectionObserver === "undefined") {
+      setShown(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {

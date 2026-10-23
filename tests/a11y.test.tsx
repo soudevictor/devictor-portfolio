@@ -4,7 +4,6 @@ import axe from "axe-core";
 import { describe, expect, it } from "vitest";
 
 import { Header } from "@/components/layout/Header";
-import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
 import { Hero } from "@/components/sections/Hero";
@@ -35,11 +34,6 @@ async function expectNoViolations(element: HTMLElement) {
 describe("acessibilidade (axe)", () => {
   it("Header não tem violações", async () => {
     const { container } = render(<Header />);
-    await expectNoViolations(container);
-  });
-
-  it("ThemeToggle não tem violações", async () => {
-    const { container } = render(<ThemeToggle />);
     await expectNoViolations(container);
   });
 

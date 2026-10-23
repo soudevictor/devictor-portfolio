@@ -1,10 +1,7 @@
 import Image from "next/image";
 import { Mail } from "lucide-react";
 
-import {
-  GitHubIcon,
-  LinkedInIcon,
-} from "@/components/ui/BrandIcons";
+import { GitHubIcon, LinkedInIcon } from "@/components/ui/BrandIcons";
 import { Container } from "@/components/ui/Container";
 import { sections, site, social } from "@/data/social";
 
@@ -16,9 +13,8 @@ const icons = {
 
 /**
  * Fecho desenhado da página: a logo volta em largura total como âncora visual,
- * com a navegação e os sociais ao redor. Não é um sitemap. A logo segue o tema
- * (preta no claro, branca no escuro) e é decorativa — o nome já vem do Header e
- * da linha de copyright.
+ * com a navegação e os sociais ao redor. Não é um sitemap. A logo é a versão
+ * branca (dark-only) e é decorativa — o nome já vem do Header e do copyright.
  */
 export function Footer() {
   return (
@@ -26,23 +22,16 @@ export function Footer() {
       <Container>
         <div aria-hidden="true">
           <Image
-            src="/images/logos/Devictor_LogoPreta.svg"
-            alt=""
-            width={936}
-            height={355}
-            className="h-12 w-auto dark:hidden md:h-20"
-          />
-          <Image
             src="/images/logos/Devictor_LogoBranca.svg"
             alt=""
             width={937}
             height={356}
-            className="hidden h-12 w-auto dark:block md:h-20"
+            className="h-12 w-auto md:h-20"
           />
         </div>
 
         <p className="mt-4 max-w-md text-[var(--ink-soft)]">
-          {site.role}, construindo interfaces com o pé no back-end.
+          {site.role}, construindo interfaces com foco em produto.
         </p>
 
         <div className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
@@ -51,7 +40,7 @@ export function Footer() {
               {sections.map((s) => (
                 <li key={s.id}>
                   <a
-                    href={`#${s.id}`}
+                    href={`/#${s.id}`}
                     className="text-[var(--ink-soft)] transition-colors hover:text-[var(--ink)]"
                   >
                     {s.label}

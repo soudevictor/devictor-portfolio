@@ -1,9 +1,8 @@
 /**
  * Stack técnica — dados da seção `#stack`.
  *
- * A trilha "Back-end & Infra" entra como direção full-stack em progresso,
- * alinhada ao posicionamento do site. Cada `highlight` ganha maior peso
- * visual sem virar card de ícone.
+ * Posicionamento front-end: linguagens, frameworks e estilização. Cada
+ * `highlight` ganha maior peso visual sem virar card de ícone.
  */
 
 export interface StackItem {
@@ -14,8 +13,6 @@ export interface StackItem {
 export interface StackCategory {
   title: string;
   items: StackItem[];
-  /** Marcador de trilha em construção (back-end). */
-  inProgress?: boolean;
 }
 
 export const stack: StackCategory[] = [
@@ -47,19 +44,6 @@ export const stack: StackCategory[] = [
       { name: "Flexbox & CSS Grid" },
       { name: "Mobile-First" },
       { name: "Figma" },
-    ],
-  },
-  {
-    title: "Back-end & Infra",
-    inProgress: true,
-    items: [
-      { name: "Node.js" },
-      { name: "REST APIs" },
-      { name: "PostgreSQL" },
-      { name: "Prisma" },
-      { name: "Git & CI/CD" },
-      { name: "Docker" },
-      { name: "Vercel" },
     ],
   },
 ];

@@ -1,8 +1,4 @@
-import type {
-  AnchorHTMLAttributes,
-  ButtonHTMLAttributes,
-  ReactNode,
-} from "react";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 
 type ButtonVariant = "primary" | "secondary" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
@@ -15,13 +11,15 @@ interface ButtonBase {
 }
 
 interface ButtonLinkProps
-  extends ButtonBase,
+  extends
+    ButtonBase,
     Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "className" | "children"> {
   href: string;
 }
 
 interface ButtonElementProps
-  extends ButtonBase,
+  extends
+    ButtonBase,
     Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children"> {
   href?: undefined;
 }
@@ -34,8 +32,7 @@ const base =
 const variants: Record<ButtonVariant, string> = {
   primary:
     "bg-[var(--accent-fill)] text-[var(--accent-contrast)] hover:bg-[var(--accent-fill-hover)]",
-  secondary:
-    "bg-[var(--surface-2)] text-[var(--ink)] hover:bg-[var(--border)]",
+  secondary: "bg-[var(--surface-2)] text-[var(--ink)] hover:bg-[var(--border)]",
   ghost: "text-[var(--ink)] hover:bg-[var(--surface-2)]",
 };
 

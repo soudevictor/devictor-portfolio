@@ -12,10 +12,7 @@ const VALID = {
 };
 
 /** Preenche os três campos com um payload e devolve os nós do DOM separados. */
-async function fill(
-  user: ReturnType<typeof userEvent.setup>,
-  values = VALID,
-) {
+async function fill(user: ReturnType<typeof userEvent.setup>, values = VALID) {
   const name = screen.getByLabelText("Seu nome");
   const email = screen.getByLabelText("Seu e-mail");
   const message = screen.getByLabelText("Sua mensagem");
@@ -47,6 +44,7 @@ describe("contactSchema", () => {
 
 describe("Contact", () => {
   beforeEach(() => {
+    vi.stubEnv("NEXT_PUBLIC_WEB3FORMS_KEY", "test-key");
     vi.stubGlobal(
       "fetch",
       vi.fn(async () => ({
@@ -58,6 +56,7 @@ describe("Contact", () => {
 
   afterEach(() => {
     vi.unstubAllGlobals();
+    vi.unstubAllEnvs();
   });
 
   it("renderiza os três campos com rótulos associados", () => {
@@ -65,13 +64,8 @@ describe("Contact", () => {
 
     expect(screen.getByLabelText("Seu nome")).toHaveAttribute("id", "name");
     expect(screen.getByLabelText("Seu e-mail")).toHaveAttribute("id", "email");
-    expect(screen.getByLabelText("Sua mensagem")).toHaveAttribute(
-      "id",
-      "message",
-    );
-    expect(
-      screen.getByRole("button", { name: "Enviar mensagem" }),
-    ).toBeInTheDocument();
+    expect(screen.getByLabelText("Sua mensagem")).toHaveAttribute("id", "message");
+    expect(screen.getByRole("button", { name: "Enviar mensagem" })).toBeInTheDocument();
   });
 
   it("marca os campos inválidos e explica o problema", async () => {
@@ -88,12 +82,12 @@ describe("Contact", () => {
 
     expect(name).toHaveAttribute("aria-invalid", "true");
     expect(name).toHaveAccessibleDescription(/mínimo 2 caracteres/i);
-    expect(
-      screen.getByLabelText("Seu e-mail"),
-    ).toHaveAccessibleDescription(/e-mail válido/i);
-    expect(
-      screen.getByLabelText("Sua mensagem"),
-    ).toHaveAccessibleDescription(/pelo menos 10 caracteres/i);
+    expect(screen.getByLabelText("Seu e-mail")).toHaveAccessibleDescription(
+      /e-mail válido/i,
+    );
+    expect(screen.getByLabelText("Sua mensagem")).toHaveAccessibleDescription(
+      /pelo menos 10 caracteres/i,
+    );
 
     // Não deve ter chamado a rede com payload inválido.
     expect(fetch).not.toHaveBeenCalled();
@@ -111,15 +105,31 @@ describe("Contact", () => {
       expect(screen.getByRole("status")).toHaveTextContent(/Mensagem enviada/i),
     );
 
+    expect(screen.getByRole("status")).toHaveFocus();
+
     const [, init] = vi.mocked(fetch).mock.calls[0]!;
     const body = JSON.parse(init!.body as string) as Record<string, string>;
     expect(body).toMatchObject(VALID);
     expect(body.subject).toContain(VALID.name);
-    // A chave vem da env var e nunca aparece no payload de teste.
+    expect(body.access_key).toBe("test-key");
     expect(fetch).toHaveBeenCalledWith(
       "https://api.web3forms.com/submit",
       expect.objectContaining({ method: "POST" }),
     );
+  });
+
+  it("volta ao formulário e foca o primeiro campo ao resetar", async () => {
+    const user = userEvent.setup();
+    render(<Contact />);
+
+    await fill(user);
+    await user.click(screen.getByRole("button", { name: "Enviar mensagem" }));
+
+    await screen.findByRole("status");
+    await user.click(screen.getByRole("button", { name: "Enviar outra mensagem" }));
+
+    expect(screen.queryByRole("status")).toBeNull();
+    expect(screen.getByLabelText("Seu nome")).toHaveFocus();
   });
 
   it("mostra o estado de envio e desabilita o botão", async () => {
@@ -144,9 +154,21 @@ describe("Contact", () => {
       ok: true,
       json: async () => ({ success: true }),
     } as unknown as Response);
-    await waitFor(() =>
-      expect(screen.getByRole("status")).toBeInTheDocument(),
-    );
+    await waitFor(() => expect(screen.getByRole("status")).toBeInTheDocument());
+  });
+
+  it("mostra erro amigável quando a chave não está configurada", async () => {
+    vi.unstubAllEnvs();
+    const user = userEvent.setup();
+    render(<Contact />);
+
+    await fill(user);
+    await user.click(screen.getByRole("button", { name: "Enviar mensagem" }));
+
+    const alert = await screen.findByRole("alert");
+    expect(alert).toHaveTextContent(/formulário está indisponível/i);
+    expect(alert).toHaveTextContent(/trabalho\.joaovictor2004@gmail\.com/i);
+    expect(fetch).not.toHaveBeenCalled();
   });
 
   it("reporta erro de rede com role=alert", async () => {
@@ -159,7 +181,7 @@ describe("Contact", () => {
     await user.click(screen.getByRole("button", { name: "Enviar mensagem" }));
 
     const alert = await screen.findByRole("alert");
-    expect(alert).toHaveTextContent("Falha na rede");
+    expect(alert).toHaveTextContent(/Não foi possível enviar sua mensagem/i);
     // O formulário continua editável para tentar de novo.
     expect(screen.getByLabelText("Seu nome")).toBeEnabled();
   });

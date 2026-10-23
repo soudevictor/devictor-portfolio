@@ -2,6 +2,8 @@
 
 Base: `SPEC.md` + `tasks/plan.md`. Ordem por dependência.
 
+> **Revisão de 2026-10-23:** as fases 1–8 registram a construção original e algumas decisões foram substituídas. Valem as decisões da Fase 9 e do `SPEC.md`: posicionamento **front-end**, tema **dark-only**, projetos com `image` (`src`, `width`, `height`, `alt`), sem `ThemeToggle`/`useTheme`, sem `category`/`featured` e sem promessa de full-stack.
+
 ## Fase 1 — Fundação
 
 - [x] Task: Commitar estado final do site vanilla (últimas edições em index.html, _hero.scss, style.css)
@@ -198,5 +200,45 @@ Segunda rodada, sobre mudanças do autor no diretório de trabalho (logos SVG, `
   - Note: o autor removeu o Instagram do rodapé; a união ainda incluía `"instagram"`, quebrando `icons[link.icon]`. `InstagramIcon` segue em `BrandIcons.tsx`.
 
 ### Pendências de mídia (ideias — não bloqueiam código)
+
 - `inspect.mjs` acusa `few-pictures` (3 imagens reais: retrato + 2 screenshots) e `no-footage`.
 - Para limpar: mais screenshots reais por projeto (hero + detalhe) e/ou um clipe curto e honesto de um produto em uso (720p, mudo, ~1 MB, com poster). Ideias detalhadas no comentário de `Stage.tsx`.
+
+## Fase 9 — Auditoria 2026-10-23 (front-end + dark-only)
+
+- [x] Task: Remover todo o sistema de tema
+  - Acceptance: sem `ThemeToggle`, `useTheme`, `tests/theme-toggle`, `localStorage`, `.dark`, tokens claros, `dark:` ou logo preta
+  - Verify: `rg` sem referências; CSS compilado sem `.dark`; build verde
+  - Files: `src/styles/globals.css`, `src/app/layout.tsx`, `Header.tsx`, `Footer.tsx`, arquivos removidos
+
+- [x] Task: Reposicionar o site como front-end
+  - Acceptance: cargo, bio, hero, contato, footer, keywords, Stack e metadata sem “full-stack/back-end”
+  - Verify: `rg` nas fontes públicas; leitura da home
+  - Files: `src/data/social.ts`, `src/data/stack.ts`, `src/app/layout.tsx`, `package.json`, `SPEC.md`, `AGENTS.md`
+
+- [x] Task: Modelo de projeto e imagens
+  - Acceptance: `Project` com `image { src, width, height, alt }`; sem `category`/`featured`; `alt` “Logomarca do …”; dimensões `1280×640`
+  - Verify: `npx tsc --noEmit`; inspeção do DOM
+  - Files: `src/data/projects.ts`, `src/components/sections/Projects.tsx`
+
+- [x] Task: 404, sitemap, robots, JSON-LD e theme-color
+  - Acceptance: `not-found.tsx` pt-BR com `noindex`; `sitemap.xml` e `robots.txt` no export; JSON-LD `Person` sem cargo inventado
+  - Verify: `npm run build` + `out/404.html`, `out/sitemap.xml`, `out/robots.txt`
+  - Files: `src/app/not-found.tsx`, `sitemap.ts`, `robots.ts`, `layout.tsx`
+
+- [x] Task: Fallbacks sem JS e foco do contato
+  - Acceptance: typewriter com primeira frase no HTML; menu mobile com fallback; formulário oculto sem JS + `mailto`; timeout/erro amigável; foco no sucesso e ao resetar
+  - Verify: `npm test`; desabilitar JS no browser
+  - Files: `useTypewriter.ts`, `Header.tsx`, `Contact.tsx`, `globals.css`
+
+- [x] Task: Validação final
+  - Acceptance: `npm run format`, `npm test`, `npm run lint`, `npx tsc --noEmit`, `npm run build` verdes; revisão manual desktop/mobile
+  - Verify: comandos + browser
+  - Files: n/a
+  - Note: 4 arquivos/32 testes; lint e typecheck limpos; export estático com `404.html`, `sitemap.xml` e `robots.txt`. No browser: desktop sem botão mobile; mobile 390 px sem overflow; menu abre/fecha com Escape e devolve o foco; sem JS o menu vira `details` fechado, o formulário some, o fallback `mailto` aparece e a primeira frase do typewriter está no HTML; 404 com um único `noindex` e links de volta para `/`.
+
+- [x] Task: P2 visual/motion (aprovado pelo autor em 2026-10-23)
+  - Acceptance: seção ativa no menu desktop, painel mobile com entrada/saída sutil e erros de contato com cor semântica
+  - Verify: browser em desktop/mobile, validação vazia e falha de rede simulada
+  - Files: `Header.tsx`, `useActiveSection.ts`, `Contact.tsx`, `globals.css`
+  - Note: `useActiveSection` usa a posição real das seções (não a ordem do menu); o painel fica montado, mas `aria-hidden`/`inert` quando fechado. Erros usam `--danger`, `--danger-surface` e `--danger-border`.

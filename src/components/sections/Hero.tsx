@@ -22,11 +22,11 @@ export function Hero() {
     <section
       id="inicio"
       aria-labelledby="inicio-title"
-      className="flex flex-col justify-center pb-16 pt-28 lg:min-h-[100svh] lg:py-24"
+      className="flex flex-col justify-center pt-28 pb-16 lg:min-h-[100svh] lg:py-24"
     >
       <h1
         id="inicio-title"
-        className="text-[clamp(2.75rem,7vw,4.5rem)] font-semibold leading-[0.95] tracking-tight text-[var(--ink)]"
+        className="text-[clamp(2.75rem,7vw,4.5rem)] leading-[0.95] font-semibold tracking-tight text-[var(--ink)]"
       >
         {site.name}
       </h1>

@@ -3,27 +3,15 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { Tag } from "@/components/ui/Tag";
-import { projects, type ProjectCategory } from "@/data/projects";
-
-/** Rótulo legível da categoria do projeto. */
-const CATEGORY_LABEL: Record<ProjectCategory, string> = {
-  frontend: "Front-end",
-  fullstack: "Full-stack",
-  backend: "Back-end",
-};
+import { projects } from "@/data/projects";
 
 /**
  * Projetos — quebra o split-stage e roda em largura total (a direction pede
- * ao menos uma seção assim). A interface real de cada produto lidera; o texto
+ * ao menos uma seção assim). A logomarca de cada produto lidera; o texto
  * fica abaixo, não sobre a imagem. Sem cards idênticos: cada projeto é uma
- * faixa com o screenshot dominante. `featured` ordena a lista e `category`
- * vira um chip, para o modelo de dados não ficar ocioso.
+ * faixa com a imagem dominante.
  */
 export function Projects() {
-  const ordered = [...projects].sort(
-    (a, b) => Number(b.featured) - Number(a.featured),
-  );
-
   return (
     <section
       id="projetos"
@@ -41,20 +29,18 @@ export function Projects() {
         </Reveal>
 
         <div className="space-y-20">
-          {ordered.map((project) => (
+          {projects.map((project) => (
             <Reveal key={project.title}>
               <article>
                 <div className="overflow-hidden">
-                  {project.screenshot && (
-                    <Image
-                      src={project.screenshot}
-                      alt={`Interface do ${project.title}`}
-                      width={1440}
-                      height={900}
-                      sizes="(min-width: 1024px) 90vw, 100vw"
-                      className="h-auto w-full"
-                    />
-                  )}
+                  <Image
+                    src={project.image.src}
+                    alt={project.image.alt}
+                    width={project.image.width}
+                    height={project.image.height}
+                    sizes="(min-width: 1024px) 90vw, 100vw"
+                    className="h-auto w-full"
+                  />
                 </div>
 
                 <div className="mt-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
@@ -62,9 +48,7 @@ export function Projects() {
                     <h3 className="text-2xl font-semibold tracking-tight text-[var(--ink)]">
                       {project.title}
                     </h3>
-                    <p className="mt-1 text-[var(--ink-soft)]">
-                      {project.subtitle}
-                    </p>
+                    <p className="mt-1 text-[var(--ink-soft)]">{project.subtitle}</p>
                     <p className="mt-1 text-sm text-[var(--ink-soft)]">
                       {project.kind}
                     </p>
@@ -73,9 +57,8 @@ export function Projects() {
                     </p>
 
                     <ul className="mt-5 flex flex-wrap gap-2">
-                      <Tag highlight>{CATEGORY_LABEL[project.category]}</Tag>
-                      {project.stack.map((tech) => (
-                        <Tag key={tech} raised>
+                      {project.stack.map((tech, index) => (
+                        <Tag key={tech} highlight={index === 0} raised>
                           {tech}
                         </Tag>
                       ))}

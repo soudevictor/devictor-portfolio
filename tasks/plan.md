@@ -1,64 +1,73 @@
-# Plano Técnico: Migração e Redesign do Portfólio Devictor
+# Plano Técnico: Portfólio Devictor
 
-Spec de referência: `SPEC.md` (aprovada em 2026-10-16).
+Spec de referência: `SPEC.md`. Este plano foi revisado em **2026-10-23** para refletir o posicionamento front-end e o tema dark-only; as fases 1–6 descrevem a construção já concluída, e a fase 7 registra a auditoria atual.
 
 ## Componentes principais e dependências
 
 ```
-Fundação (scaffold, tokens, tema)
-  └── Dados (projects.ts, social.ts, copy)
+Fundação (scaffold, tokens dark-only, fontes)
+  └── Dados (projects.ts, social.ts, stack.ts)
         └── Componentes UI primitivos (Button, Container, Tag)
               └── Seções (Header/Hero/About/Stack/Projects/Contact/Footer)
-                    └── Animações e interações (Reveal em CSS, typewriter, tema)
-                          └── Qualidade (testes, a11y, Lighthouse) → Deploy
+                    └── Interações (Reveal em CSS, typewriter, formulário)
+                          └── Qualidade (testes, a11y, SEO, build estático)
 ```
 
-Descoberta ao auditar o site antigo: existe uma seção **"Stack Técnica"** (Linguagens & Core / Frameworks & Libs / Estilização & Design) além das 4 seções da spec. Ela entra no redesign — é ótima para a narrativa full-stack. Assets a migrar: `assets/images` (background.webp, img01.jpeg, logos/, thumbnails/), `assets/videos/background.mp4` (loop de fundo, usado como mídia muted no hero ou fallback do background estático) e `favicon.ico`. **Currículo:** `assets/docs/JoaoVictor_DesenvolvedorFrontEnd.pdf` serve de placeholder em `public/curriculo.pdf` até o autor fornecer o novo PDF — o site sempre linka `/curriculo.pdf`, então a troca é só substituir o arquivo.
+A seção **Stack Técnica** faz parte do escopo desde o início. Hoje ela é front-end: linguagens/core, frameworks/libs e estilização/design. O estudo de back-end do autor não é anunciado no site. O currículo continua em `public/curriculo.pdf`; trocar o PDF não exige mudança de código.
 
-## Fases (ordem de implementação)
+## Fases
 
-### Fase 1 — Fundação (scaffold)
-- `create-next-app` (Next.js 15, App Router, TS strict, Tailwind v4, ESLint) na raiz do projeto, preservando `SPEC.md`, `tasks/` e o site antigo em `legacy/` (movido, não deletado, para referência até o deploy).
-- Tokens de design em `globals.css` (CSS variables para light/dark), fontes via `next/font`.
-- Checkpoint: `npm run dev` sobe, página em branco com tema alternando.
+### Fase 1 — Fundação (concluída)
 
-### Fase 2 — Dados e SEO
-- `src/data/projects.ts` (migrar os projetos atuais do HTML antigo, categoria `frontend`), `social.ts`, textos revisados com narrativa full-stack.
-- Metadata completa (title/description "Desenvolvedor Full-Stack", OpenGraph, favicon).
-- Checkpoint: dados tipados compilam; metadata visível no view-source.
+- Next.js 15 App Router, React 19, TypeScript strict, Tailwind v4, ESLint, Vitest.
+- Tokens em `src/styles/globals.css`; fontes via `next/font`.
+- **Revisão 2026-10-23:** tokens passaram a ser dark-only; `color-scheme: dark` no `:root`; removidos tema claro, `.dark`, toggle e variantes `dark:`.
 
-### Fase 3 — Layout e componentes base
-- Header (nav âncora + ThemeToggle sem flash de tema), Footer, primitivos UI.
-- Checkpoint: navegação por teclado funciona entre âncoras; toggle persiste.
+### Fase 2 — Dados e SEO (concluída)
 
-### Fase 4 — Seções
-- Hero (typewriter próprio com frases full-stack), Sobre (foto `img01.jpeg` otimizada via `next/image`), Stack Técnica (agora incluindo trilha back-end), Projetos (grid com cards + tags de categoria), Contato (React Hook Form + zod + Web3Forms, estados de loading/sucesso/erro, link `/curriculo.pdf`).
-- Checkpoint: página completa navegável, visual final nos dois temas.
+- `src/data/projects.ts`, `social.ts`, `stack.ts` como fonte única de conteúdo.
+- Metadata, OpenGraph/Twitter, JSON-LD `Person`, `sitemap.xml`, `robots.txt`, `theme-color`.
+- **Revisão 2026-10-23:** posicionamento front-end; e-mail canônico Gmail; projetos com `image { src, width, height, alt }`; nada de `category`/`featured`.
 
-### Fase 5 — Motion e polish
-- Animações de entrada por seção (`Reveal` em CSS + IntersectionObserver), micro-interações, respeito a `prefers-reduced-motion`.
-- Checkpoint: animações suaves, zero jank, redução de movimento respeitada.
+### Fase 3 — Layout e componentes base (concluída)
 
-### Fase 6 — Qualidade e deploy
-- Vitest + Testing Library + axe nos componentes interativos; lint/format; build estático.
-- Lighthouse local até bater as metas (Perf ≥ 95, A11y/BP/SEO = 100).
-- Deploy Vercel em `soudevictor.vercel.app`; remoção do `legacy/` após validação em produção.
+- Header com navegação âncora, painel mobile e fallback sem JS; Footer; primitivos UI.
+- **Revisão 2026-10-23:** logo branca fixa; botão de menu depende de `.js`; Escape e clique fora fecham o painel; o `ThemeToggle` foi removido.
+
+### Fase 4 — Seções (concluída)
+
+- Hero, Sobre, Stack Técnica, Projetos, Contato.
+- **Revisão 2026-10-23:** copy front-end; Stack sem “Back-end & Infra”; Projetos sem filtros/categorias, com logomarcas e `alt` “Logomarca do …”; Contato com timeout, erros amigáveis e fallback `mailto` sem JS.
+
+### Fase 5 — Motion e polish (concluída)
+
+- `Reveal` em CSS + IntersectionObserver; micro-interações; `prefers-reduced-motion`.
+- **Revisão 2026-10-23:** typewriter nasce com a primeira frase no HTML; fallback de impressão para o Reveal; Hero continua fora do Reveal por causa do LCP.
+
+### Fase 6 — Qualidade e deploy (parcial)
+
+- Vitest + Testing Library + axe; lint/format; build estático.
+- Deploy em `soudevictor.vercel.app` ainda é uma etapa manual do autor.
+- **Revisão 2026-10-23:** 4 arquivos/32 testes; `vitest-axe` removido por não ser usado; metadata do `package.json` atualizada.
+
+### Fase 7 — Auditoria e correções (2026-10-23)
+
+- P0/P1/P2 técnico: 404, SEO, no-JS, foco/erros do contato, CLS de imagens, remoção de resíduos de tema/full-stack.
+- P2 visual/motion executado em 2026-10-23 com validação do autor: seção ativa no menu (desktop e mobile), transição simétrica do painel mobile com `aria-hidden`/`inert` e erros de contato em tokens semânticos (`--danger*`).
+- Checkpoint: `npm run format`, `npm test`, `npm run lint`, `npx tsc --noEmit`, `npm run build`; validação manual no browser em desktop e mobile.
 
 ## Riscos e mitigações
 
-| Risco | Mitigação |
-|---|---|
-| Flash de tema no load | Script inline no `<head>` lendo localStorage antes da hidratação |
-| Copy full-stack parecer inflada sem projeto back-end | Texto focado em capacidade/direção; seção Stack já mostra trilha back-end em progresso |
-| Web3Forms key vazar | Env var `NEXT_PUBLIC_WEB3FORMS_KEY` documentada, nunca commitada |
-| Regressão de performance com Motion | Animar só transform/opacity; lazy nas seções abaixo da dobra |
-| Perder conteúdo do site antigo | `legacy/` preservado até deploy validado |
+| Risco                                 | Mitigação                                                                                          |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Conteúdo sumir sem JS                 | Typewriter com texto inicial no HTML; menu/nav e contato com fallbacks; Reveal só oculta sob `.js` |
+| Imagem de projeto com `alt` mentiroso | Hoje são logomarcas; `alt` e copy dizem “Logomarca”, não “Interface”                               |
+| CLS por dimensões erradas             | `width`/`height` reais por projeto nos dados (`1280×640`)                                          |
+| Erro de API cru na UI                 | Mensagem amigável; detalhe técnico só em `console.error`; timeout de 10 s                          |
+| Chave Web3Forms vazar                 | `NEXT_PUBLIC_WEB3FORMS_KEY` só em `.env.local`; nunca commitar a chave                             |
+| Regressão de performance              | Animar só transform/opacity; Hero fora do Reveal para não atrasar o LCP                            |
+| Voltar tema claro por engano          | Não existe `.dark`, `dark:` nem persistência; tokens claros foram removidos                        |
 
-## Paralelização
+## Verificação
 
-- Fase 2 (dados) pode ser escrita em paralelo com Fase 3 (componentes) — dados são apenas tipados.
-- Fases 4–6 são sequenciais.
-
-## Verificação entre fases
-
-Cada fase termina com `npm run lint && npm run build` verde + checkpoint manual descrito acima. Fase 6 adiciona `npm run test` e Lighthouse.
+Cada entrega termina com `npm run lint`, `npx tsc --noEmit`, `npm test` e `npm run build`. O deploy e a inspeção visual final são passos manuais do autor.

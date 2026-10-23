@@ -5,7 +5,6 @@ import { afterEach } from "vitest";
 afterEach(() => {
   cleanup();
   document.documentElement.className = "";
-  window.localStorage.clear();
 });
 
 // jsdom não implementa IntersectionObserver (usado pelo Reveal). Stub mínimo:

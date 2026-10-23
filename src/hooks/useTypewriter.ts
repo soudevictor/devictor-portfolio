@@ -27,7 +27,9 @@ export function useTypewriter({
   holdTime = 1800,
 }: UseTypewriterOptions) {
   const reduced = usePrefersReducedMotion();
-  const [text, setText] = useState("");
+  // A primeira frase nasce no HTML: sem JS a linha não fica em branco e,
+  // com JS, o ciclo começa da frase completa em vez de um flash vazio.
+  const [text, setText] = useState(phrases[0] ?? "");
   const [index, setIndex] = useState(0);
   const [deleting, setDeleting] = useState(false);
 

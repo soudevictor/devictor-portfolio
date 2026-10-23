@@ -1,12 +1,11 @@
 {
   "name": "devictor-portfolio",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
-  "description": "Portfólio pessoal de João Victor Carvalho — Desenvolvedor Full-Stack. Next.js 15, React 19, TypeScript, Tailwind CSS v4.",
+  "description": "Portfólio pessoal de João Victor Carvalho — Desenvolvedor Front-End. Next.js 15, React 19, TypeScript, Tailwind CSS v4.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,json,css}\"",
     "test": "vitest run",
@@ -14,20 +13,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/0Carvalh0/site-portfolio-html-css"
+    "url": "https://github.com/soudevictor/devictor-portfolio"
   },
   "keywords": [
     "portfolio",
-    "full-stack",
+    "frontend",
     "react",
     "nextjs",
+    "angular",
     "typescript",
     "tailwindcss"
   ],
   "author": "João Victor Carvalho de Souza",
   "license": "ISC",
+  "engines": {
+    "node": ">=20"
+  },
   "bugs": {
-    "url": "https://github.com/0Carvalh0/site-portfolio-html-css/issues"
+    "url": "https://github.com/soudevictor/devictor-portfolio/issues"
   },
   "homepage": "https://soudevictor.vercel.app/",
   "dependencies": {
@@ -59,8 +62,7 @@
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
-    "vitest": "^5.0.5",
-    "vitest-axe": "^0.1.0"
+    "vitest": "^5.0.5"
   },
   "allowScripts": {
     "unrs-resolver@1.12.2": true

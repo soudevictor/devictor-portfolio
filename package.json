@@ -1,12 +1,11 @@
 {
   "name": "devictor-portfolio",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "description": "Portfólio pessoal de João Victor Carvalho — Desenvolvedor Front-End. Next.js 15, React 19, TypeScript, Tailwind CSS v4.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,json,css}\"",
     "test": "vitest run",
@@ -27,6 +26,9 @@
   ],
   "author": "João Victor Carvalho de Souza",
   "license": "ISC",
+  "engines": {
+    "node": ">=20"
+  },
   "bugs": {
     "url": "https://github.com/soudevictor/devictor-portfolio/issues"
   },

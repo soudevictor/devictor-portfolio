@@ -52,4 +52,4 @@ Adding a project is a `src/data/projects.ts` edit only; the UI consumes `title`,
 
 ## Source of truth
 
-`SPEC.md` is the living spec with a decisions log — read it before changing scope or design assumptions. `tasks/todo.md` tracks phase status (deploy is still unchecked); `tasks/plan.md` explains the original architecture phases.
+`SPEC.md` is the living spec with a decisions log — read it before changing scope or design assumptions. `tasks/todo.md` tracks phase status (deploy is live at `soudevictor.vercel.app`); `tasks/plan.md` explains the original architecture phases.

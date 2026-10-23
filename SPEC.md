@@ -28,7 +28,7 @@ Migrar o portfólio pessoal de João Victor Carvalho de HTML/Sass/JS vanilla par
 9. O site antigo será substituído; o conteúdo atual (textos, imagens, projetos) será migrado e revisado.
 10. **Domínio:** mantém `soudevictor.vercel.app`.
 11. **Blog:** fora do escopo inicial, mas a arquitetura (App Router) permite adicionar `/blog` depois sem refatoração.
-12. **Currículo:** um novo PDF será fornecido pelo autor e trocado em `public/` — o site linka para um caminho estável (`/curriculo.pdf`) para a troca ser trivial. Foto/avatar atual é reutilizado.
+12. **Currículo:** PDF disponível em `public/curriculo.pdf` e linkado pelo caminho estável `/curriculo.pdf`; a troca do arquivo não exige mudança no código. Foto/avatar atual é reutilizado.
 
 ### Modelo de dados de projetos
 

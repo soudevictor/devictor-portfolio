@@ -139,7 +139,7 @@ Base: `SPEC.md` + `tasks/plan.md`. Ordem por dependência.
   - Files: n/a (medição)
   - Note: Perf 100 / A11y 100 / BP 100 / SEO 100; LCP 1432–1545ms, CLS 0.0001, TBT 11–18ms (3 rodadas). Correções que sustentam o número: retrato 211→81 KB, screenshots 407→92 KB (PNG→WebP), clipe 807→89 KB (1080p→960x540/CRF29) e o hero fora do `Reveal` (não esconder o elemento LCP atrás de animação). O servidor de inspeção passou a comprimir com brotli e a servir `immutable` em `/_next/static`, como a Vercel — sem isso a medição local enxergava 475 KB de JS onde o usuário real vê ~150 KB.
 
-- [ ] Task: Deploy Vercel em `soudevictor.vercel.app`; remover `legacy/` após validação
+- [x] Task: Deploy Vercel em `soudevictor.vercel.app`; remover `legacy/` após validação
   - Acceptance: site no ar, domínio apontando, formulário enviando em produção, `legacy/` removido do repo
   - Verify: produção navegável + form testado em produção
   - Files: `legacy/` (removido), config Vercel se necessário
